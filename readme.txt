@@ -4,8 +4,8 @@ HTML - The clean code approach
 Author: Hannes Diercks
 URL: http://www.red-thorn.de
 Plugin Info: http://plugins.red-thorn.de/libary/!html/
-Version: 1.4.6
-Date: 2012-01-17 10:25:00
+Version: 1.4.7
+Date: 2012-01-17 15:32:00
 Requires: 3.0
 Tested: 3.3.1
 
@@ -32,6 +32,9 @@ Installation
 
 Changelog
 ---------
+
+### 1.4.7
++	github test
 
 ### 1.4.6
 +	github init
