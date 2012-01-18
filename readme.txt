@@ -1,13 +1,15 @@
 HTML - The clean code approach
 ==============================
 
-Author: Hannes Diercks
-URL: http://www.red-thorn.de
-Plugin Info: http://plugins.red-thorn.de/libary/!html/
-Version: 1.4.7
-Date: 2012-01-17 15:32:00
-Requires: 3.0
-Tested: 3.3.1
+Author: Hannes Diercks  
+URL: http://www.red-thorn.de  
+Plugin Info: http://plugins.red-thorn.de/libary/!html/  
+Version: 1.4.7  
+Date: 2012-01-18 16:40:00  
+Requires: 3.0  
+Tested: 3.3.1  
+
+
 
 
 Description
@@ -23,6 +25,8 @@ the global and including the class files.
 See http://plugins.red-thorn.de/libary/!html/demo for details
 
 
+
+
 Installation
 ------------
 
@@ -30,11 +34,10 @@ Installation
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
 
+
+
 Changelog
 ---------
-
-### 1.4.7
-+	github test
 
 ### 1.4.6
 +	github init
@@ -58,24 +61,30 @@ Changelog
 ### 1.4
 +   **First public version**
 
-### 1.3
-+   Intern version *no details*
-
 ### 1.0
 +   Intern version *no details*
+
+
 
 
 Upgrade Notice
 --------------
 
+### 1.4.7
++	github test
+
 ### 1.4
 +   First stable & public version
+
+
 
 
 Known Bugs
 ----------
 
 +   None ;)
+
+
 
 
 Todo

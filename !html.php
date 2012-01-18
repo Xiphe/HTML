@@ -3,8 +3,8 @@
 Plugin Name: !HTML
 Plugin URI: http://plugins.red-thorn.de/libary/!html/
 Description: A Plugin to provide global access to the HTML class
-Version: 1.4.6
-Date: 2012-01-17
+Version: 1.4.7
+Date: 2012-01-18
 Author: Hannes Diercks
 Author URI: http://red-thorn.de/
 Update Server: http://plugins.red-thorn.de/api/index.php
