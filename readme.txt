@@ -22,7 +22,7 @@ This plugin is for other plugin-developers that want to use
 the HTML Class and does nothing by itself besides initiating
 the global and including the class files.
 
-See http://plugins.red-thorn.de/libary/!html/demo for details
+See [Demo Page](http://plugins.red-thorn.de/libary/!html/demo) for details
 
 
 
