@@ -59,6 +59,10 @@ class HTML extends HTMLCleaner {
 		'head' => 'profile',
 		'label' => 'for',
 		'rederect' => 'content',
+		'viewport' => 'content',
+		'appleIcon' => 'href',
+		'abbr' => 'title',
+		'action' => 'value',
 	);
 
 	// if Tag is in Array the specified arguments will be copyed - see $this->_doubleAttrs();
@@ -69,6 +73,7 @@ class HTML extends HTMLCleaner {
 		'pw' => array('id', 'name'),
 		'textarea' => array('id', 'name'),
 		'hidden' => array('id', 'name'),
+		'action' => array('id', 'name'),
 		'img' => array('src', 'alt'),
 	);
 	
@@ -131,7 +136,18 @@ class HTML extends HTMLCleaner {
 		),
 		'rederect' => array(
 			'http-equiv' => 'refresh',
-		)
+		),
+		'viewport' => array(
+			'name' => 'viewport',
+			'content' => 'width=device-width, initial-scale=1.0',
+		),
+		'appleIcon' => array(
+			'rel' => 'apple-touch-icon',
+		),
+		'action' => array(
+			'type' => 'hidden',
+			'name' => 'action',
+		),
 	);
 	
 	// Special Tags or Pseudo-Name-Tags
@@ -154,6 +170,9 @@ class HTML extends HTMLCleaner {
 		'checkbox' => 'input',
 		'css' => 'link',
 		'rederect' => 'meta',
+		'viewport' => 'meta',
+		'appleIcon' => 'link',
+		'action' => 'input',
 	);
 	
 	private $_bbs = array(
@@ -213,6 +232,7 @@ class HTML extends HTMLCleaner {
 	 * @date Nov 11th 2011
 	 */
 	public function __construct($init = array()) {
+		$this->_unsetMagic();
 		if(!is_array($init))
 			$init = array('baseUrl' => $init);
 		foreach($this->_possibleInitArgs as $arg => $opt) {
@@ -362,9 +382,10 @@ class HTML extends HTMLCleaner {
 				$this->addTab();
 			}
 			$inner = $r1.$this->get_clean($inner, $tag).$r2;
-		} elseif($tag != 'pre') {
-			$inner = preg_replace('/\r\n|\r|\n|\t/', '', $inner);
-		}
+		} 
+		// elseif($tag != 'pre') {
+			// $inner = preg_replace('/\r\n|\r|\n|\t/', '', $inner);
+		// }
 			
 			
 		return $inner;
@@ -440,7 +461,11 @@ class HTML extends HTMLCleaner {
 		$attrs = $this->_escapeEqu($attrs);
 		
 		if(count(($attrsex = explode('|', $attrs))) <= 1 && count(explode('=', $attrs)) <= 1) {
-			if(isset($this->_first_attr[$tag]))
+			if( substr( $attrs, 0, 1 ) == '#' )
+				$r['id'] = substr( $attrs, 1, strlen( $attrs ) );
+			elseif( substr( $attrs, 0, 1 ) == '.' )
+				$r['class'] = substr( $attrs, 1, strlen( $attrs ) );
+			elseif(isset($this->_first_attr[$tag]))
 				return array($this->_first_attr[$tag] => $attrs);
 			elseif($force !== false)
 				return array($this->_default_attr => $attrs);
@@ -452,8 +477,15 @@ class HTML extends HTMLCleaner {
 			$e = explode('=', $attr);
 			if(count($e) == 2)
 				$r[$e[0]] = $e[1];
-			elseif(count($e) == 1)
-				$r[$e[0]] = null;
+			elseif(count($e) == 1) {
+				if( substr( $e[0], 0, 1 ) == '#' ) {
+					$r['id'] = substr( $e[0], 1, strlen( $attrs ) );
+				} elseif( substr( $e[0], 0, 1 ) == '.' ) {
+					$r['class'] = substr( $e[0], 1, strlen( $attrs ) );
+				} else {
+					$r[$e[0]] = null;
+				}
+			}
 		}
 		return $r;
 	}
@@ -666,33 +698,64 @@ class HTML extends HTMLCleaner {
 		}
 	}
 	
-	/** 
-	 * START TAG GENERATORS 
+	/** returns the bbed string
+	 *
+	 * @param string $string a string containing [bb] tags
+	 * @return strin a string with compiled bb
+	 * @date Feb 13th 2012
 	 */
-	
 	public function bb($string) {
 		return preg_replace(array_flip($this->_bbs), $this->_bbs, $string);
 	}
 	
-	/** Ends a started tag
-	 *
-	 * @param mixed $i null for the last tag; int for multiple last tags; 'all' for closing all tags
-	 * @return string closing tags
+	/** 
+	 * START TAG GENERATORS 
+	 */
+	
+	
+	/** Ends a started tag parameter can be:
+	 *  • inager to close multible tags
+	 *  • 'all' to close all open tags
+	 *  • '#foo' to close all tags including the first with id="foo"
+	 *  • '.bar' to close all tags including the first with class="bar" 
+	 * 	  (this must be the first class if there are multiple ones)
+	 * @param mixed $until see description
+	 * @return object HTML
 	 * @date Nov 11th 2011
 	 */
-	public function end($i = null) {
+	public function end($until = null) {
 		if($this->disable) return;
-		// echo '<pre>'.var_export($this->_cTO, true).'</pre>';
 		
 		$r = '';
-		if(is_int($i)) {
+		if(is_int($until)) {
 			$j = 0;
-			while($i > $j) {
+			while($until > $j) {
 				$r .= $this->r_end(null);
 				$j++;
 			}
-		} elseif($i == 'all') {
+		} elseif($until == 'all') {
 			while(count($this->_tagstoend) > 0) {
+				$r .= $this->r_end(null);
+			}
+		} elseif($until !== null) {
+			$doEnd = true;			
+			while($doEnd) {
+				end($this->_tagstoend);
+				$lastTag = $this->_tagstoend[key($this->_tagstoend)];
+				
+				if($lastTag['tag'] == $until) {
+					$doEnd = false;
+				} elseif( substr($until, 0, 1) == '#' 
+				 && isset($lastTag['ident']['id']) 
+				 && $lastTag['ident']['id'] == substr($until, 1, strlen($until))
+				) {
+					$doEnd = false;
+				} elseif( substr($until, 0, 1) == '.' 
+				 && isset($lastTag['ident']['class']) 
+				 && $lastTag['ident']['class'] == substr($until, 1, strlen($until))
+				) {
+					$doEnd = false;
+				}
 				$r .= $this->r_end(null);
 			}
 		} else {
@@ -724,7 +787,7 @@ class HTML extends HTMLCleaner {
 	
 	/** echoes the current amount of Tabs
 	 *
-	 * @return void
+	 * @return object HTML
 	 * @date Nov 11th 2011
 	 */
 	public function tabs() {
@@ -733,13 +796,29 @@ class HTML extends HTMLCleaner {
 		echo $this->get_tabs();
 		return $this;
 	}
-		
+	
+	/** echoes a line break char
+	 *
+	 * @return object HTML
+	 * @date Feb 13th 2012
+	 */
 	public function n() {
 		if($this->disable) return;
 		
 		echo $this->break;
+		return $this;
 	}
 	
+	/** Build an input field
+	 *
+	 * @param string|array $attrs attributes of the input
+     *        the id or name will be used for linking with the label
+	 * @param string|array|false|null $label 
+     *        string for label text
+     *        for details: array('inner' => 'label text', 'pos' => 'before|after', 'sep' => '<br />')
+	 * @return object HTML
+	 * @date Feb 13th 2012
+	 */
 	public function input($attrs = null, $label = null) {
 		if($this->disable) return;
 		
@@ -750,6 +829,16 @@ class HTML extends HTMLCleaner {
 		return $this;
 	}
 	
+	/** Build an password input
+	 *
+	 * @param string|array $attrs attributes of the input
+     *        the id or name will be used for linking with the label
+	 * @param string|array|false|null $label 
+     *        string for label text
+     *        for details: array('inner' => 'label text', 'pos' => 'before|after', 'sep' => '<br />')
+	 * @return object HTML
+	 * @date Feb 13th 2012
+	 */
 	public function pw($attrs = null, $label = null) {
 		if($this->disable) return;
 		
@@ -759,7 +848,21 @@ class HTML extends HTMLCleaner {
 		echo $this->_add_label($this->_gen_label($label), $input);
 		return $this;
 	}
-	
+
+    /** 
+     * Build a Textarea with optional Label
+     * 
+	 * the label can be a string for label text or
+     * for details: array('inner' => 'label text', 'pos' => 'before|after', 'sep' => '<br />')
+	 * 
+     * @param string $inner the content of the textbox
+     * @param string|array $attrs attributes of the textbox
+     *        the id or name will be used for linking with the label
+     * @param string|array|false|null $label 
+     *        
+     * @return object HTML
+     * @date Feb 13th 2012
+     */
 	public function textarea($inner, $attrs = null, $label = null) {
 		if($this->disable) return;
 		
@@ -822,12 +925,13 @@ class HTML extends HTMLCleaner {
 	
 	/** generates a select input with options and label
 	 *
-	 * @param mixed $attrs shortstyle attr string or attr array
+	 * @param string|array $attrs shortstyle attr string or attr array
 	 * @param array $options optional: array of options 
 	 * 	Example: array('foo' => 'bar'); generates <option name="bar">foo</option>
 	 * @param string $selected
 	 * @param mixed $label string for label name or array with label options
 	 * @return object HTML
+	 * @access public
 	 * @date Nov 11th 2011
 	 */
 	public function select($attrs, $options = array(), $selected = null, $label = array()) {
@@ -849,11 +953,27 @@ class HTML extends HTMLCleaner {
 		return $this;
 	}
 	
+	/** builds a code block, usualy with a <pre> tag
+	 *
+	 * @param string $inner the inner code
+	 * @param string|array $attrs shortstyle attr string or attr array
+	 * @param string $tag the tagname to be used. Default: pre
+	 * @return object HTML
+	 * @access public
+	 * @date Feb 13th 2012
+	 */
 	public function code($inner, $attrs = null, $tag = 'pre') {
 		call_user_func_array(array($this, 'n_'.$tag), array(htmlspecialchars($inner), $attrs));
 		return $this;
 	}
 	
+	/** builds an unsorted list
+	 *
+	 * @param array $lis an array of list elements array('inner' => 'attrs')
+	 * @param string|array $attrs shortstyle attr string or attr array
+	 * @return object HTML
+	 * @date Feb 13th 2012
+	 */
 	public function ul($lis, $attrs = null) {
 		if($this->disable) return;
 		
@@ -868,6 +988,13 @@ class HTML extends HTMLCleaner {
 		return $this;
 	}
 	
+	/** builds a sorted list
+	 *
+	 * @param array $lis an array of list elements array('inner' => 'attrs')
+	 * @param string|array $attrs shortstyle attr string or attr array
+	 * @return object HTML
+	 * @date Feb 13th 2012
+	 */
 	public function ol($lis, $attrs = null) {
 		if($this->disable) return;
 		
@@ -881,6 +1008,7 @@ class HTML extends HTMLCleaner {
 		return $this;
 	}
 	
+
 	public function XHTML($headattrs = null) {
 		if($this->disable) return;
 		
@@ -888,24 +1016,76 @@ class HTML extends HTMLCleaner {
 		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"';
 		echo $this->break.$this->tab;
    		echo '"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'.$this->break;
-		$this->s_html('xmlns=http://www.w3.org/1999/xhtml');
+		$this->s_html('xmlns=http://www.w3.org/1999/xhtml|class=no-js'.$this->ieClass(' '));
 		$this->s_head($headattrs);
 		return $this;
 	}
+	
 	public function HTML5($headattrs = null) {
+		$htmlattrs = array('class' => 'no-js'.$this->ieClass(' '));
+		if(is_array($headattrs) && isset($headattrs['html'])) {
+			$htmlattrs = array_merge(
+				$htmlattrs,
+				$this->_try_explode($headattrs['html'], 'html')
+			);
+		}
+		
+		$headattrs = array();
+		$headattrsAdd = is_array($headattrs) && isset($headattrs['head']) ?
+			$headattrs['head'] : $headattrs;
+
+		$headattrs = array_merge(
+			$headattrs,
+			$this->_try_explode($headattrs, 'head')
+		);
+		
+		
 		if($this->disable) return;
 
 		echo '<!DOCTYPE HTML>'.$this->break;
-		$this->s_html();
+		
+		$this->s_html($htmlattrs);
 		$this->s_head($headattrs);
 		return $this;
 	}	
 	
+	public function ieClass($before = '') {
+		$sIeClass = '';
+		if(class_exists('THEMASTER')) {
+			$TM = THEMASTER::inst();
+			if($TM->is_browser('ie')) {
+				if($TM->is_browser('ie6s')) {
+					$sIeClass = $before.'ie6';
+				} elseif($TM->is_browser('ie7s')) {
+					$sIeClass = $before.'ie7';
+				} elseif($TM->is_browser('ie9s')) {
+					$sIeClass = $before.'ie8';
+				}
+			}
+		}
+		return $sIeClass;
+	}
+	
+	/** alias for $this->script()
+	 *
+	 * @param string $inner the inner javascript text
+	 * @param string|array $attrs shortstyle attr string or attr array
+	 * @return object HTML
+	 * @date Feb 13th 2012
+	 */
 	public function js($inner, $attrs = null) {
 		$this->script($inner, $attrs);
 		return $this;
 	}
 	
+	/** builds a script tag.
+	 *  if the inner content starts with "ht", "./" or ".." it will be handled as
+	 *  the src value and there will be no inner content
+	 *
+	 * @param string $inner inner content or src url
+	 * @return object HTML
+	 * @date Feb 13th 2012
+	 */
 	public function script($inner, $attrs = null) {
 		if($this->disable) return;
 		
@@ -918,6 +1098,12 @@ class HTML extends HTMLCleaner {
 		return $this;
 	}
 	
+	/** no tags just tabs and breaks
+	 *
+	 * @param string $inner the content
+	 * @return object HTML
+	 * @date Feb 13th 2012
+	 */
 	public function blank($inner = null) {
 		if($this->disable) return;
 		
@@ -942,7 +1128,12 @@ class HTML extends HTMLCleaner {
 		return str_replace('=', '\=', str_replace('|', '\|', $string));
 	}
 	
-	// private $i = 0;
+	/** testing
+	 *
+	 * @param __mixed__ $__foo__ __description__
+	 * @return __void__ __description__
+	 * @date Feb 13th 2012
+	 */
 	public function __call($method, $args) {
 		// var_dump($method);
 		// $this->i++;
@@ -999,5 +1190,7 @@ class HTML extends HTMLCleaner {
 		$this->clean(ob_get_clean());
 		return $this;
 	}
+	
+
 }
 ?>

@@ -4,8 +4,8 @@ HTML - The clean code approach
 Author: Hannes Diercks  
 URL: http://www.red-thorn.de  
 Plugin Info: http://plugins.red-thorn.de/libary/!html/  
-Version: 1.4.7  
-Date: 2012-01-18 16:40:00  
+Version: 1.4.8  
+Date: 2012-02-24 11:00:00  
 Requires: 3.0  
 Tested: 3.3.1  
 
@@ -38,6 +38,15 @@ Installation
 
 Changelog
 ---------
+
+### 1.4.8
++	$HTML->tag('fb', '.foo|#bar'); now available for <tag class="foo" id="bar">fb</tag>
+
+### 1.4.7
++	added viewport() & appleIcon()
++	renamed readme.txt into readme.md
++	added functionality: end() function now accepts tagnames, ids and first class parameters to 
+	end all tags until match.
 
 ### 1.4.6
 +	github init
