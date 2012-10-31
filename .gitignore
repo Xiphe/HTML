@@ -4,4 +4,4 @@
 *.settings
 *.project
 *.DS_Store
-test.php
+config.php
