@@ -1,4 +1,4 @@
-<?php // die('!HTML Symlinked');
+<?php 
 // * Version 1.2.2
 require_once('htmlcleaner.php');
 define('HTMLCLASSAVAILABLE', true);
@@ -8,12 +8,9 @@ class HTML extends HTMLCleaner {
 	public $store = 'static';
 	public $tabs = 0; // Starting Count for Tabs
 	private static $_tabs = 0; // Starting Count for Tabs
-	// public $tab = "";
 	public $tab = "\t";
 	public $tabWorth = 8;
-	// public $break = "";
 	public $break = "\n";
-	// public $noComments = true;
 	public $noComments = false;
 	public $jsCssCompress = true;
 	public $magicUrl = true;
@@ -49,7 +46,6 @@ class HTML extends HTMLCleaner {
 		'img' => 'src',
 		'link' => 'href',
 		'css' => 'href',
-		'less' => 'href',
 		'script' => 'src',
 		'input' => 'name',
 		'checkbox' => 'id',
@@ -67,7 +63,6 @@ class HTML extends HTMLCleaner {
 		'appleIcon' => 'href',
 		'abbr' => 'title',
 		'action' => 'value',
-		'description' => 'content'
 	);
 
 	// if Tag is in Array the specified arguments will be copyed - see $this->_doubleAttrs();
@@ -94,13 +89,7 @@ class HTML extends HTMLCleaner {
 			'type' => 'text/css',
 			'media' => 'all'
 		),
-		'less' => array(
-			'rel' => 'stylesheet/less',
-			'type' => 'text/css',
-			'media' => 'all'
-		),
 		'style' => array(
-			'rel' => 'stylesheet',
 			'type' => 'text/css',
 			'media' => 'all'
 		),
@@ -133,9 +122,6 @@ class HTML extends HTMLCleaner {
 		'clear' => array(
 			'class' => 'clear',
 		),
-		'dclear' => array(
-			'class' => 'clear',
-		),
 		'utf8' => array(
 			'http-equiv' => 'Content-Type',
 			'content' => 'text/html; charset=utf-8'
@@ -162,9 +148,6 @@ class HTML extends HTMLCleaner {
 			'type' => 'hidden',
 			'name' => 'action',
 		),
-		'description' => array(
-			'name' => 'description'
-		)
 	);
 	
 	// Special Tags or Pseudo-Name-Tags
@@ -180,24 +163,21 @@ class HTML extends HTMLCleaner {
 		'zw' => 'div',
 		'favicon' => 'link',
 		'clear' => 'br',
-		'dclear' => 'div',
 		'utf8' => 'meta',
 		'jquery' => 'script',
 		'jqueryui' => 'script',
 		'pw' => 'input',
 		'checkbox' => 'input',
 		'css' => 'link',
-		'less' => 'link',
 		'rederect' => 'meta',
 		'viewport' => 'meta',
 		'appleIcon' => 'link',
 		'action' => 'input',
-		'description' => 'meta'
 	);
 	
 	private $_bbs = array(
 		'/\*\*(.*)\*\*/Usi' => '<strong>$1</strong>',
-		'/([^:]+)\/\/(.*)([^:]+)\/\//Usi' => '$1<em>$2$3</em>', // TODO: FIX
+		'/([^:]+)\/\/(.*)([^:]+)\/\//Usi' => '$1<span class="italic">$2$3</span>', // TODO: FIX
 		'/__(.*)__/Usi' => '<span class="underline">$1</span>',
 		'/•••(.*)•••/Usi' => '<ul>•$1•</ul>',
 		'/\|\|\|(.*)\|\|\|/Usi' => '<ol>•$1•</ol>',
@@ -215,8 +195,6 @@ class HTML extends HTMLCleaner {
 	private $_selfContainingTags = array(
 		'checked',
 		'multiple',
-		'disabled',
-		'required'
 	);
 	
 	private $_tagOptionKeys = array(
@@ -241,9 +219,7 @@ class HTML extends HTMLCleaner {
 	// Array for Content to be added to empty Tags - example: $this->set_inner_preset('title', 'Hello World');
 	private $_inner_presets = array();
 	
-	private $_initialNoComments;
-	private $_initialBreak;
-	private $_initialTab;
+	
 
 		
 
@@ -256,10 +232,6 @@ class HTML extends HTMLCleaner {
 	 * @date Nov 11th 2011
 	 */
 	public function __construct($init = array()) {
-		$this->_initialNoComments = $this->noComments;
-		$this->_initialBreak = $this->break;
-		$this->_initialTab = $this->tab;
-
 		$this->_unsetMagic();
 		if(!is_array($init))
 			$init = array('baseUrl' => $init);
@@ -289,35 +261,22 @@ class HTML extends HTMLCleaner {
 		return substr($this->baseUrl, strlen($this->baseUrl)-1, 1) != '/' ? $this->baseUrl.'/' : $this->baseUrl;
 	}
 	
-	/** 
-	 * Checkes the $this->_doubleAttrs; array for Tags that need dublicated args
-	 * Example: You can call $HTML->input('id=foo'); and will get <input id="foo" name="foo" [...] />
+	/** Checkes the $this->_doubleAttrs; array for Tags that need dublicated args
+	 *  Example: You can call $HTML->input('id=foo'); and will get <input id="foo" name="foo" [...] />
 	 *
-	 * @access private
-	 * @date   Sep 18th 2012
-	 * @param  string $tag the tagname
-	 * @param  array $attrs the attributes of tag
+	 * @param string $tag the tagname
+	 * @param array $attrs the attributes of tag
 	 * @return array new attributes
+	 * @access private
+	 * @date Nov 11th 2011
 	 */
 	private function _doubleAttrs($tag, $attrs) {
 		$opt = $this->_doubleAttrs;
 		if(isset($opt[$tag])) {
-			foreach (array(0 => 1, 1 => 0) as $k1 => $k2) {
-				$attr1 = $opt[$tag][$k1];
-				$attr2 = $opt[$tag][$k2];
-				if (!isset($attrs[$attr1])
-				 && isset($attrs[$attr2]))  {
-					if ($attr2 == 'name' && $attr1 == 'id') {
-						$attrs[$attr1] = preg_replace(
-							'/[\[\]]/',
-							'_',
-							$attrs[$attr2]
-						);
-					} else {
-						$attrs[$attr1] = $attrs[$attr2];
-					}
-				}
-			}
+			if(!isset($attrs[$opt[$tag][0]]) && isset($attrs[$opt[$tag][1]])) 
+				$attrs[$opt[$tag][0]] = $attrs[$opt[$tag][1]];
+			if(!isset($attrs[$opt[$tag][1]]) && isset($attrs[$opt[$tag][0]])) 
+				$attrs[$opt[$tag][1]] = $attrs[$opt[$tag][0]];
 		}
 		return $attrs;
 	}
@@ -346,7 +305,7 @@ class HTML extends HTMLCleaner {
 				$this->_current_identifyer[$key] = substr($value, 0, (($pos = strpos($value, ' ')) !== false ? $pos : strlen($value)));
 			if($key && $value === null) {
 				continue;
-			} elseif($key && strlen($value))
+			} elseif($key && $value)
 				$r .= ' '.$key.'="'.$this->_minibb($value).'"';
 			elseif($key && $value === '') {
 				if(in_array($key, $this->_selfContainingTags))
@@ -504,7 +463,7 @@ class HTML extends HTMLCleaner {
 		if(count(($attrsex = explode('|', $attrs))) <= 1 && count(explode('=', $attrs)) <= 1) {
 			if( substr( $attrs, 0, 1 ) == '#' )
 				$r['id'] = substr( $attrs, 1, strlen( $attrs ) );
-			elseif( substr( $attrs, 0, 1 ) == '.' && !in_array( substr( $attrs, 1, 1 ), array( '/', '\\' ) ) )
+			elseif( substr( $attrs, 0, 1 ) == '.' )
 				$r['class'] = substr( $attrs, 1, strlen( $attrs ) );
 			elseif(isset($this->_first_attr[$tag]))
 				return array($this->_first_attr[$tag] => $attrs);
@@ -748,25 +707,6 @@ class HTML extends HTMLCleaner {
 	public function bb($string) {
 		return preg_replace(array_flip($this->_bbs), $this->_bbs, $string);
 	}
-
-	/** Turn the ajax-mode on or off.
-	 *  In ajax-mode there will be no comments, braks or tabs. only the minimal markup will be generated
-	 *
-	 * @param bool $flag true/false
-	 * @return void
-	 * @date Mrz 27th 2012
-	 */
-	public function ajaxMode( $flag ) {
-		if( $flag === true ) {
-			$this->noComments = true;
-			$this->break = '';
-			$this->tab = '';
-		} elseif( $flag === false ) {
-			$this->noComments = $this->_initialNoComments;
-			$this->break = $this->_initialBreak;
-			$this->tab = $this->_initialTab;
-		}
-	}
 	
 	/** 
 	 * START TAG GENERATORS 
@@ -784,6 +724,25 @@ class HTML extends HTMLCleaner {
 	 * @date Nov 11th 2011
 	 */
 	public function end( $until = null ) {
+		
+		$debug = RBMaster::inst();
+		if(!isset($GLOBALS['i'])) {
+			$GLOBALS['i'] = 0;
+		}
+		$GLOBALS['i'] = $GLOBALS['i']+1;
+		
+		if($GLOBALS['i'] > 10) {
+			$debug->debug($this->_tagstoend);
+		}
+		
+		$debug->debug($GLOBALS['i']);
+		// RBMaster::inst()->debug('callstack', 4);
+		if($GLOBALS['i'] >= 14) {
+			die();
+		}
+		
+
+
 		if($this->disable) return;
 		
 		$r = '';
@@ -965,7 +924,7 @@ class HTML extends HTMLCleaner {
 		
 		$label = $this->_try_explode($label, null, false);
 		$attrs = $this->_try_explode($attrs, 'checkbox');
-		if($checked == true
+		if($checked === true
 			|| (
 				isset($attrs['id'])
 				&& (
@@ -987,16 +946,12 @@ class HTML extends HTMLCleaner {
 	 *
 	 * @param string|array $attrs shortstyle attr string or attr array
 	 * @param array $options optional: array of options 
-	 * 	Example: 
-	 * 		array('foo' => 'bar'); generates <option value="bar">foo</option>
-	 *  Example 2: 
-	 *  	array( 'foo' => array( 'inner' => 'Lorem', 'attrs' => 'bar=dude|x=y' ) ) generates
-	 *  	<option value="foo" bar="dude" x="y">Lorem</option>
+	 * 	Example: array('foo' => 'bar'); generates <option name="bar">foo</option>
 	 * @param string $selected
 	 * @param mixed $label string for label name or array with label options
 	 * @return object HTML
 	 * @access public
-	 * @date Mrz 13th 2012
+	 * @date Nov 11th 2011
 	 */
 	public function select($attrs, $options = array(), $selected = null, $label = array()) {
 		if($this->disable) return;
@@ -1008,21 +963,8 @@ class HTML extends HTMLCleaner {
 		
 		$label = $this->_gen_label($label);
 		foreach($options as $key => $option) {
-			if( is_array($option) ) {
-				$inner = $option['inner'];
-				$attrs = $this->_try_explode($option['attrs'], 'option', true);
-				if( !isset( $attrs['value'] ) ) {
-					$attrs['value'] = $key;
-				}
-				if( $key == $selected ) {
-					$attrs['selected'] = 'selected';
-				}
-			} else {
-				$inner = $option;
-				$attrs = $key == $selected ? 'value='.$key.'|selected=selected' : $key;
-			}
-
-			$r .= $this->r_option($inner, $attrs);
+			$key = $key == $selected ? 'value='.$key.'|selected=selected' : $key;
+			$r .= $this->r_option($option, $key);
 		}
 		
 		$r .= $this->r_end();
@@ -1052,20 +994,13 @@ class HTML extends HTMLCleaner {
 	 * @date Feb 13th 2012
 	 */
 	public function ul($lis, $attrs = null) {
-		
 		if($this->disable) return;
 		
 		$r = $this->sg_ul($attrs);
 		foreach($lis as $inner2 => $attrs) {
-			if( is_int( $inner2 ) ) {
-				if( is_string( $attrs ) ) {
-					$inner = $attrs;
-					$attrs = null;
-				} elseif( is_array( $attrs ) && isset( $attrs['inner'] ) && isset( $attrs['attrs'] ) ) {
-					$inner = $attrs['inner'];
-					$attrs = $attrs['attrs'];
-				}
-			}
+			$inner = is_int($inner2) ? $attrs : $inner2;
+			$attrs = is_int($inner2) ? null : $attrs;
+			
 			$this->li($inner, $attrs);
 		}
 		$this->end();
@@ -1106,9 +1041,7 @@ class HTML extends HTMLCleaner {
 	}
 	
 	public function HTML5($headattrs = null) {
-		if($this->disable) return;
-
-		$htmlattrs = array('class' => 'no-js'.$this->ieClass(' ').$this->browserClass(' '));
+		$htmlattrs = array('class' => 'no-js'.$this->ieClass(' '));
 		if(is_array($headattrs) && isset($headattrs['html'])) {
 			$htmlattrs = array_merge(
 				$htmlattrs,
@@ -1125,48 +1058,33 @@ class HTML extends HTMLCleaner {
 			$this->_try_explode($headattrs, 'head')
 		);
 		
+		
+		if($this->disable) return;
 
 		echo '<!DOCTYPE HTML>'.$this->break;
-
-		$this->s_html($htmlattrs)
-			->s_head($headattrs)
-			->utf8()
-			->meta('http-equiv=X-UA-Compatible|content=IE\=edge,chrome\=1');
+		
+		$this->s_html($htmlattrs);
+		$this->s_head($headattrs);
 		return $this;
 	}	
 	
 	public function ieClass($before = '') {
 		$sIeClass = '';
-		if( class_exists( 'Xiphe\THEMASTER\THETOOLS' ) ) {
-			if(Xiphe\THEMASTER\THETOOLS::is_browser('ie')) {
-				if(Xiphe\THEMASTER\THETOOLS::is_browser('ie6x')) {
-					$sIeClass = $before.'lt-ie10 lt-ie9 lt-ie8 lt-ie7';
-				} elseif(Xiphe\THEMASTER\THETOOLS::is_browser('ie7x')) {
-					$sIeClass = $before.'lt-ie10 lt-ie9 lt-ie8';
-				} elseif(Xiphe\THEMASTER\THETOOLS::is_browser('ie8x')) {
-					$sIeClass = $before.'lt-ie10 lt-ie9';
-				} elseif(Xiphe\THEMASTER\THETOOLS::is_browser('ie9x')) {
-					$sIeClass = $before.'lt-ie10';
+		if(class_exists('THEMASTER')) {
+			$TM = THEMASTER::inst();
+			if($TM->is_browser('ie')) {
+				if($TM->is_browser('ie6s')) {
+					$sIeClass = $before.'ie6';
+				} elseif($TM->is_browser('ie7s')) {
+					$sIeClass = $before.'ie7';
+				} elseif($TM->is_browser('ie9s')) {
+					$sIeClass = $before.'ie8';
 				}
 			}
 		}
 		return $sIeClass;
 	}
 	
-	public function browserClass($before = '') {
-		if (class_exists('Xiphe\THEMASTER\THETOOLS')) {
-			$browser = str_replace(' ', '_', strtolower(Xiphe\THEMASTER\THETOOLS::get_browser()));
-			$version = str_replace('.', '-', Xiphe\THEMASTER\THETOOLS::get_browserVersion());
-			$engine = strtolower(Xiphe\THEMASTER\THETOOLS::get_layoutEngine());
-			if (!empty($engine)) {
-				$engine .=' ';
-			}
-
-			return "$before$engine$browser $browser-$version";
-		}
-		return '';
-	}
-
 	/** alias for $this->script()
 	 *
 	 * @param string $inner the inner javascript text
@@ -1216,7 +1134,7 @@ class HTML extends HTMLCleaner {
 		echo $this->break;
 		return $this;
 	}
-
+	
 	public function to_get(array $arr) {
 		$r = array();
 		foreach($arr as $key => $value) {
@@ -1228,65 +1146,7 @@ class HTML extends HTMLCleaner {
 	public function escape_mBB($string) {
 		return str_replace('=', '\=', str_replace('|', '\|', $string));
 	}
-	public function esc($string) {
-		return str_replace('=', '\=', str_replace('|', '\|', $string));
-	}
-
-	public function merge_attrs($attrs1, $attrs2)
-	{
-		$attrs = array();
-		foreach (func_get_args() as $fargs) {
-			$newAttrs = $this->_try_explode($fargs);
-			if (isset($attrs['class']) && isset($newAttrs['class'])) {
-				$attrs['class'] = $this->merge_classes($attrs['class'], $newAttrs['class']);
-				unset($newAttrs['class']);
-			}
-			if (isset($attrs['style']) && isset($newAttrs['style'])) {
-				$attrs['style'] = $this->merge_styles($attrs['style'], $newAttrs['style']);
-				unset($newAttrs['style']);
-			}
-			$attrs = array_merge($attrs, $newAttrs);
-		}
-		return $attrs;
-	}
 	
-	public function merge_classes($a, $b)
-	{
-		$a = explode(' ', $a);
-		foreach (explode(' ', $b) as $cls) {
-			if (!in_array($cls, $a)) {
-				$a[] = $cls;
-			}
-		}
-		return implode(' ', $a);
-	}
-
-	public function merge_styles($a, $b) {
-		$a = explode(';', $a);
-		$amap = array();
-		$gk = function($s) {
-			return trim(substr($s, 0, strpos($s, ':')));
-		};
-		foreach ($a as $k => $v) {
-			if(empty($v)) {
-				continue;
-			}
-			$a[$k] = trim($v);
-			$amap[$gk($v)] = $k;
-		}
-
-		foreach (explode(';', $b) as $st) {
-			if(empty($v)) {
-				continue;
-			}
-			if (isset($amap[$gk($st)])) {
-				unset($a[$amap[$gk($st)]]);
-			}
-			$a[] = trim($st);
-		}
-		return implode(';', $a);
-	}
-
 	/** testing
 	 *
 	 * @param __mixed__ $__foo__ __description__

@@ -39,6 +39,10 @@ Installation
 Changelog
 ---------
 
+### 1.4.9
++	$HTML->select now accepts arrays for options attributes.
++	$HTML->ajaxMode( true||false ) added for disabeling comments, tabs and breaks.
+
 ### 1.4.8
 +	$HTML->tag('fb', '.foo|#bar'); now available for <tag class="foo" id="bar">fb</tag>
 
