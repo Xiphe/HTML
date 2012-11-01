@@ -5,7 +5,7 @@ $tags = 'attribute, default';
 
 $description = <<<'EOD'
 If you specify a Base-Url in the [Global Options](#globaloptions_baseurl),
-a "./" to the beginning of the value of a src or href attribute will be replaced by the baseurl.  
+a "./" to the beginning of the value of a src or href attribute will be replaced by the baseurl.
 *This can be turned off in the Global Options or escaped by "\"*
 EOD;
 
@@ -19,4 +19,3 @@ $prediction = <<<'EOD'
 <a href="./somewhere/">Link to</a>
 
 EOD;
-?>

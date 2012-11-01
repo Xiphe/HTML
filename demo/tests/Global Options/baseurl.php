@@ -7,17 +7,17 @@ $description = <<<'EOD'
 The Base Url is used by the [Magic Url replacement](#attributes_magicurl) to replace any href or src
 attributes starting with a ./.
 
-**Type:** *string*  
+**Type:** *string*
 **Default:** "./"
 EOD;
 
 $code = <<<'EOD'
-$HTML->set_option('baseUrl', "http://www.example.org");
+$HTML->setOption('baseUrl', "http://www.example.org");
 
 $HTML->img('./img/example.jpg');
 $HTML->a('Link', './subpage.html');
 
-$HTML->unset_option('baseUrl'); // Default.
+$HTML->unsetOption('baseUrl'); // Default.
 $HTML->img('./img/example.jpg');
 EOD;
 
@@ -27,4 +27,3 @@ $prediction = <<<'EOD'
 <img alt="example.jpg" src="./img/example.jpg" />
 
 EOD;
-?>

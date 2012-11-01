@@ -11,11 +11,11 @@ EOD;
 
 $defaultList = '';
 foreach (Xiphe\HTML\core\TagInfo::$defaultAttributes as $tag => $attrs) {
-	$attrstring = '';
-	foreach ($attrs as $key => $value) {
-		$attrstring .= $key.'="'.$value.'" ';
-	}
-	$defaultList .= "\n+ **".$tag.'**: '.trim($attrstring);
+    $attrstring = '';
+    foreach ($attrs as $key => $value) {
+        $attrstring .= $key.'="'.$value.'" ';
+    }
+    $defaultList .= "\n+ **".$tag.'**: '.trim($attrstring);
 }
 $description = sprintf($description, $defaultList);
 
@@ -27,4 +27,3 @@ $prediction = <<<'EOD'
 <link href="../style.css" media="all" rel="stylesheet" type="text/css" />
 
 EOD;
-?>

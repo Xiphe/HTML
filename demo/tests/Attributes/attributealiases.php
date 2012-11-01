@@ -19,4 +19,3 @@ $prediction = <<<'EOD'
 <img alt="A test image" src="http://www.example.org/test.jpg" />
 
 EOD;
-?>

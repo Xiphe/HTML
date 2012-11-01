@@ -1,4 +1,14 @@
 <?php
+/**
+ * Initiation file for !HTML
+ *
+ * @category Markup
+ * @package  Xiphe\HTML
+ * @author   Hannes Diercks <xiphe@gmx.de>
+ * @license  http://www.gnu.org/licenses/gpl-2.0.txt GNU GENERAL PUBLIC LICENSE
+ * @link     https://github.com/Xiphe/-HTML
+ */
+
 /*
 Plugin Name: !HTML
 Plugin URI: https://github.com/Xiphe/-HTML
@@ -16,28 +26,29 @@ namespace Xiphe;
 
 $GLOBALS['Xiphe\THEMASTER\Updatable'][] = __FILE__;
 $GLOBALS['Xiphe\THEMASTER\Settings'][] = array('Xiphe\HTML\core\Config', 'get_themaster_settings');
-define('Xiphe_HTML_ROOT_FOLDER', dirname(__FILE__).DIRECTORY_SEPARATOR);
-define('Xiphe_HTML_LIB_FOLDER', Xiphe_HTML_ROOT_FOLDER.'lib'.DIRECTORY_SEPARATOR);
+define('XIPHE_HTML_ROOT_FOLDER', dirname(__FILE__).DIRECTORY_SEPARATOR);
+define('XIPHE_HTML_LIB_FOLDER', XIPHE_HTML_ROOT_FOLDER.'lib'.DIRECTORY_SEPARATOR);
 
-spl_autoload_register(function($class) {
-	if (strpos($class, 'Xiphe\HTML\\') === 0) {
-		$path = explode('\\', $class);
-		$name = end($path);
-		$path = array_splice($path, 2, -1);
-		$path[] = strtolower($name).'.php';
-		$path = implode(DIRECTORY_SEPARATOR, $path);
+spl_autoload_register(
+    function ($class) {
+        if (strpos($class, 'Xiphe\HTML\\') === 0) {
+            $path = explode('\\', $class);
+            $name = end($path);
+            $path = array_splice($path, 2, -1);
+            $path[] = $name.'.php';
+            $path = implode(DIRECTORY_SEPARATOR, $path);
 
-		require(Xiphe_HTML_ROOT_FOLDER.$path);
-		if ($class == 'Xiphe\HTML\core\Config') {
-			HTML\core\Config::init();
-		}
-	} elseif($class === 'Xiphe\HTML') {
-		include(dirname(__FILE__).DIRECTORY_SEPARATOR.'html.php');
-	}
-});
+            include XIPHE_HTML_ROOT_FOLDER.$path;
+            if ($class == 'Xiphe\HTML\core\Config') {
+                HTML\core\Config::init();
+            }
+        } elseif ($class === 'Xiphe\HTML') {
+            include dirname(__FILE__).DIRECTORY_SEPARATOR.'HTML.php';
+        }
+    }
+);
 
 if (!defined('HTMLCLASSAVAILABLE')) {
-	$GLOBALS['HTML'] = new HTML();
-	define('HTMLCLASSAVAILABLE', true);
+    $GLOBALS['HTML'] = new HTML();
+    define('HTMLCLASSAVAILABLE', true);
 }
-?>

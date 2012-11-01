@@ -8,7 +8,7 @@ Parses [markdown](http://daringfireball.net/projects/markdown/)-syntax in the ta
 EOD;
 
 $code = <<<'EOD'
-$HTML->m_blank('# h1 
+$HTML->m_blank('# h1
 **strong** _em_');
 EOD;
 
@@ -17,4 +17,3 @@ $prediction = <<<'EOD'
 <p><strong>strong</strong> <em>em</em></p>
 
 EOD;
-?>

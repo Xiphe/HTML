@@ -4,10 +4,10 @@ $order = 20;
 $tags = 'specialtag, label, input';
 
 $description = <<<'EOD'
-When generating a input, textfield or select tag, a label can be added as second/third parameter.  
+When generating a input, textfield or select tag, a label can be added as second/third parameter.
 
 Per default the label will be named after the id of the input,
-**false** will return no label, a **string** will be the inner content of the label. 
+**false** will return no label, a **string** will be the inner content of the label.
 An array or string can contain following options:
 
 + **inner**: the inner content
@@ -31,14 +31,14 @@ $HTML->input('foo', 'sep=:|inner=Hello Foo');
 $HTML->n();
 
 $HTML->textarea(
-	'Inner Content',
-	'textarea',
-	array(
-		'inner' => 'This is a lable',
-		'pos' => 'after',
-		'sep' => $HTML->ri_span('/'),
-		'glue' => false
-	)
+    'Inner Content',
+    'textarea',
+    array(
+        'inner' => 'This is a lable',
+        'pos' => 'after',
+        'sep' => $HTML->ri_span('/'),
+        'glue' => false
+    )
 );
 EOD;
 
@@ -58,4 +58,3 @@ $prediction = <<<'EOD'
 <label for="textarea">This is a lable</label>
 
 EOD;
-?>

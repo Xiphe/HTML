@@ -4,7 +4,7 @@ $order = 40;
 $tags = 'tag, basic, start, end';
 
 $description = <<<'EOD'
-You can start Tags without inner-content whith the [prefix](#prefixes) **s_**.  
+You can start Tags without inner-content whith the [prefix](#prefixes) **s_**.
 And you can end this Tag with the method [$HTML->end()](#theend).
 EOD;
 
@@ -18,4 +18,3 @@ $prediction = <<<'EOD'
 </div>
 
 EOD;
-?>

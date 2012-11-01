@@ -4,13 +4,12 @@ $order = 70;
 $tags = 'specialtag, html';
 
 $description = <<<'EOD'
-Two methods to start a new HTML document.  
-  
-The first parameter can be attributes for the head-tag, the second attributes for the html tag.  
-if [**THETOOLS**](https://github.com/Xiphe/-THE-MASTER/blob/master/core/tools.php) are availabe, 
+Two methods to start a new HTML document.
+
+The first parameter can be attributes for the head-tag, the second attributes for the html tag.
+if [**THETOOLS**](https://github.com/Xiphe/-THE-MASTER/blob/master/core/tools.php) are availabe,
 some additional html classes will be set (browser, css-engine and ie classes).
 EOD;
-
 
 $code = <<<'PHP'
 $HTML->HTML5()->end('all');
@@ -59,4 +58,3 @@ $prediction = <<<'HTML'
 </html><!-- .myhtmlclass -->
 
 HTML;
-?>

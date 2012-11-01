@@ -9,7 +9,7 @@ from [core/config.php](#Github).
 EOD;
 
 $code = <<<'EOD'
-require_once('../_html.php');
+require_once '../_html.php';
 global $HTML;
 print_r($HTML);
 EOD;
@@ -21,8 +21,7 @@ Xiphe\HTML Object
         (
         )
 
-    [ID:Xiphe\HTML:private] => 1
+    [_ID:Xiphe\HTML:private] => 1
 )
 
 EOD;
-?>

@@ -5,7 +5,7 @@ $tags = 'specialtag, pseudo';
 
 $description = <<<'EOD'
 There are some non-HTML-tags provided as shortcut to a specific tag/attr combo in cooperation with
-[Default Attributes](#defaultattributes)  
+[Default Attributes](#defaultattributes)
 *.zerowrap is a class i use for stacking elements on top of each other, while css position still is relative or static*
 Here are examples:
 EOD;
@@ -51,4 +51,3 @@ $prediction = <<<'EOD'
 <meta content="Lorem Ipsum" name="description" />
 
 EOD;
-?>

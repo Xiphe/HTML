@@ -20,4 +20,3 @@ $prediction = <<<'EOD'
 </div>
 
 EOD;
-?>

@@ -4,8 +4,8 @@ $order = 10;
 $tags = 'attribute, basic';
 
 $description = <<<'EOD'
-Attributes are passed as a the second parameter - or for starting and self-closing tags as the first and only.  
-name and value are separated by an equality sign. (can be escaped)  
+Attributes are passed as a the second parameter - or for starting and self-closing tags as the first and only.
+name and value are separated by an equality sign. (can be escaped)
 The Default Attribute is **class**, see [First Attributes](#firstattributes) for exceptions.
 EOD;
 
@@ -23,4 +23,3 @@ $prediction = <<<'EOD'
 <a href="http://www.example.org?get=param">link</a>
 
 EOD;
-?>

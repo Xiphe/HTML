@@ -15,4 +15,3 @@ $prediction = <<<'EOD'
 <br foo="bar">?!?</br>
 
 EOD;
-?>

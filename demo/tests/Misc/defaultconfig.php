@@ -8,7 +8,7 @@ Here are the default settings from Xiphe\HTML\core\config.
 EOD;
 
 $code = <<<'EOD'
-var_dump(Xiphe\HTML\core\Config::get_defaults());
+var_dump(Xiphe\HTML\core\Config::getDefaults());
 EOD;
 
 $prediction = <<<'EOD'
@@ -45,4 +45,3 @@ array(14) {
 }
 
 EOD;
-?>

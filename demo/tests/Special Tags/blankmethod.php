@@ -8,7 +8,6 @@ This will parse the given content to fit into the tabbed markup but will not add
 any tags to it.
 EOD;
 
-
 $code = <<<'PHP'
 $HTML->s_div();
 echo 'Not that nice.';
@@ -30,4 +29,3 @@ Not that nice.</div>
 </div>
 
 HTML;
-?>

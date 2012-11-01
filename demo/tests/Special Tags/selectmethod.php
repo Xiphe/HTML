@@ -13,26 +13,25 @@ The select() method accepts up to four parameters.
 4. The [label](#speciallabel).
 EOD;
 
-
 $code = <<<'PHP'
 $HTML->select('user-role', array(
- 	'admin' => 'Administrator',
- 	'user' => 'Standard User',
- 	'guest' => 'Mr. X',
+	 'admin' => 'Administrator',
+	 'user' => 'Standard User',
+	 'guest' => 'Mr. X',
 ), 'guest', 'Please choose a role');
 $HTML->n();
 
 $HTML->select('foo', array(
- 	$HTML->t_option('Hello'),
- 	$HTML->t_option('World', 'data-info=bar')
+	 $HTML->t_option('Hello'),
+	 $HTML->t_option('World', 'data-info=bar')
 ), 1, false);
 $HTML->n();
 
 $HTML->select('lorem', array(
- 	'Test1',
- 	'foo' => 'Test2',
- 	'Test3',
- 	'Test4'
+	 'Test1',
+	 'foo' => 'Test2',
+	 'Test3',
+	 'Test4'
 ), array('foo', 'Test4', 1));
 PHP;
 
@@ -58,4 +57,3 @@ $prediction = <<<'HTML'
 </select><!-- #lorem -->
 
 HTML;
-?>

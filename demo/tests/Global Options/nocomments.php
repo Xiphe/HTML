@@ -6,7 +6,7 @@ $tags = 'global, settings, comments, disable';
 $description = <<<'EOD'
 Set to true to skip comment tags.
 
-**Type:** *boolean*  
+**Type:** *boolean*
 **Default:** false
 EOD;
 
@@ -14,7 +14,7 @@ $code = <<<'EOD'
 for ($i=0; $i < 2; $i++) {
 	if ($i === 1) {
 		/* Disabling Comments on the second run */
-		$HTML->set_option('noComments', true)->n();
+		$HTML->setOption('noComments', true)->n();
 	}
 
 	$HTML->s_div('#foo')
@@ -35,4 +35,3 @@ $prediction = <<<'EOD'
 </div>
 
 EOD;
-?>

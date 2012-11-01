@@ -51,4 +51,3 @@ Xiphe\HTML\core\Tag Object
 )
 
 EOD;
-?>

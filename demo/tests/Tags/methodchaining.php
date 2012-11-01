@@ -19,4 +19,3 @@ $prediction = <<<'EOD'
 <hr />
 
 EOD;
-?>

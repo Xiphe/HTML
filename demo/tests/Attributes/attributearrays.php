@@ -9,9 +9,9 @@ EOD;
 
 $code = <<<'EOD'
 $HTML->a('lorem', array(
-	'href' => 'http://www.example.org/?foo=bar',
-	'target' => '_blank',
-	'style' => 'color: green;',
+    'href' => 'http://www.example.org/?foo=bar',
+    'target' => '_blank',
+    'style' => 'color: green;',
 ));
 EOD;
 
@@ -19,4 +19,3 @@ $prediction = <<<'EOD'
 <a href="http://www.example.org/?foo=bar" style="color: green;" target="_blank">lorem</a>
 
 EOD;
-?>

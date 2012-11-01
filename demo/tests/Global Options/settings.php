@@ -21,11 +21,11 @@ $myHTML = new Xiphe\HTML(array(
   'tab' => '  ' // Set tab to two spaces.
 ));
 
-printf('\'%s\'', $myHTML->get_option('tab'));
+printf('\'%s\'', $myHTML->getOption('tab'));
 
-$myHTML->unset_option('tab')->n(); // reset to global.
+$myHTML->unsetOption('tab')->n(); // reset to global.
 
-printf('\'%s\'', $myHTML->get_option('tab'));
+printf('\'%s\'', $myHTML->getOption('tab'));
 
 EOD;
 
@@ -33,4 +33,3 @@ $prediction = <<<'EOD'
 '  '
 '	'
 EOD;
-?>

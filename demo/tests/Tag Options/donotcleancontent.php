@@ -32,4 +32,3 @@ $prediction = <<<'EOD'
 <div id="wrap"><div class="foo"><div class="bar">Lorem!</dvi></div></div>
 
 EOD;
-?>

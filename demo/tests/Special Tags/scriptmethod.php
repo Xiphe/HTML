@@ -7,7 +7,6 @@ $description = <<<'EOD'
 The script() method will automaticly switch between embeded or extern scripts.
 EOD;
 
-
 $code = <<<'PHP'
 $HTML->script('./script.js');
 $HTML->script('jQuery(document).ready(function($){ alert("hi"); });');
@@ -18,4 +17,3 @@ $prediction = <<<'HTML'
 <script type="text/javascript">jQuery(document).ready(function($){ alert("hi"); });</script>
 
 HTML;
-?>

@@ -18,4 +18,3 @@ Lorem Ipsum
 <div class="bar">foo</div>
 
 EOD;
-?>

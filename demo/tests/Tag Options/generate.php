@@ -22,4 +22,3 @@ $prediction = <<<'EOD'
 </select><!-- #foo -->
 
 EOD;
-?>

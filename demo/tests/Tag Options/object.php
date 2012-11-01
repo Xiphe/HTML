@@ -16,4 +16,3 @@ $prediction = <<<'EOD'
 <div foo="bar">Content</div>
 168
 EOD;
-?>

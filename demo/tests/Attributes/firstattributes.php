@@ -10,12 +10,12 @@ The Default First Attribute is **class** but specific tags do have other firsts 
 EOD;
 
 $singles = array();
-foreach (Xiphe\HTML\core\TagInfo::$singleAttrkeys as $k => $v) {
-	$singles[$v][] = $k;
+foreach (Xiphe\HTML\core\TagInfo::$singleAttrKeys as $k => $v) {
+    $singles[$v][] = $k;
 }
 $singleList = '';
 foreach ($singles as $val => $t) {
-	$singleList .= "\n+ **".implode(', ', $t).'**: '.$val;
+    $singleList .= "\n+ **".implode(', ', $t).'**: '.$val;
 }
 $description = sprintf($description, $singleList);
 
@@ -27,4 +27,3 @@ $prediction = <<<'EOD'
 <a href="http://www.example.org/">link</a>
 
 EOD;
-?>

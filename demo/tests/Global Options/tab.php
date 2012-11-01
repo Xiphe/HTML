@@ -4,20 +4,20 @@ $order = 20;
 $tags = 'global, settings, tab';
 
 $description = <<<'EOD'
-The Tab setting is the symbol used to indent a new line.  
+The Tab setting is the symbol used to indent a new line.
 
-**Type:** *string*  
+**Type:** *string*
 **Default:** "\t"
 EOD;
 
 $code = <<<'EOD'
-$HTML->set_option('tab', '  '); // Set tab to two spaces.
+$HTML->setOption('tab', '  '); // Set tab to two spaces.
 
 $HTML->s_div('#foo');
 $HTML->div('This is indented with two spaces. (instance Setting)');
 $HTML->end();
 
-$HTML->unset_option('tab')->n();
+$HTML->unsetOption('tab')->n();
 
 $HTML->s_div('#bar');
 $HTML->div('This is indented with a tab. (global setting)');
@@ -35,4 +35,3 @@ $prediction = <<<'EOD'
 </div><!-- #bar -->
 
 EOD;
-?>

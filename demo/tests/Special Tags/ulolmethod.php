@@ -7,7 +7,6 @@ $description = <<<'EOD'
 As seen in [The select() method](#selectmethod) this methods are accepting an array of lis as a second parameter.
 EOD;
 
-
 $code = <<<'PHP'
 $HTML->ul('foo', array(
 	'a', 'b', 'c'
@@ -35,4 +34,3 @@ $prediction = <<<'HTML'
 </ol><!-- .bar -->
 
 HTML;
-?>

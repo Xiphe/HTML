@@ -17,4 +17,3 @@ $prediction = <<<'EOD'
 <a href="http://www.example.org/?foo=bar" target="_blank">lorem</a>
 
 EOD;
-?>

@@ -8,7 +8,7 @@ Generates a tag without tabs and breaks.
 EOD;
 
 $code = <<<'EOD'
-$HTML->add_tabs(5); // Pretend we are deeply nested.
+$HTML->addTabs(5); // Pretend we are deeply nested.
 
 $string = 'This is '.$HTML->ri_span('what', '.foo').' you want.';
 print_r($string);
@@ -24,4 +24,3 @@ This is <span class="foo">what</span> you want.
 This 					<span class="bar">looks</span>
  strange.
 EOD;
-?>
