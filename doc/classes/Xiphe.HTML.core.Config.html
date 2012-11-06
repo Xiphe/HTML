@@ -1,0 +1,365 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » \Xiphe\HTML\core\Config</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Namespaces</a></li>
+<li><a href="../namespaces/Xiphe.html"><i class="icon-th"></i> Xiphe</a></li>
+<li><a href="../namespaces/global.html"><i class="icon-th"></i> global</a></li>
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Diff.html"><i class="icon-folder-open"></i> Diff</a></li>
+<li><a href="../packages/DiffLib.html"><i class="icon-folder-open"></i> DiffLib</a></li>
+<li><a href="../packages/Xiphe.html"><i class="icon-folder-open"></i> Xiphe</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">189</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">1</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<span class="btn-group visibility" data-toggle="buttons-checkbox"><button class="btn public active" title="Show public elements">Public</button><button class="btn protected" title="Show protected elements">Protected</button><button class="btn private" title="Show private elements">Private</button><button class="btn inherited active" title="Show inherited elements">Inherited</button></span><div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-custom icon-method"></i> Methods
+                    <ul>
+<li class="method public "><a href="#method_ajax" title="ajax :: Activates or deactivates the ajax mode."><span class="description">Activates or deactivates the ajax mode.</span><pre>ajax()</pre></a></li>
+<li class="method public "><a href="#method_get" title="get :: Getter for the current value for the requested key."><span class="description">Getter for the current value for the requested key.</span><pre>get()</pre></a></li>
+<li class="method public "><a href="#method_getDefaults" title="getDefaults :: Returns the default configuration."><span class="description">Returns the default configuration.</span><pre>getDefaults()</pre></a></li>
+<li class="method public "><a href="#method_getHTMLInstance" title="getHTMLInstance :: Retrieves the last used instance of \Xiphe\HTML from static
+class variable."><span class="description">Retrieves the last used instance of \Xiphe\HTML from static
+class variable.</span><pre>getHTMLInstance()</pre></a></li>
+<li class="method public "><a href="#method_getThemasterSettings" title="getThemasterSettings :: "><span class="description">getThemasterSettings()
+        </span><pre>getThemasterSettings()</pre></a></li>
+<li class="method public "><a href="#method_init" title="init :: One-time-initiation for this Class."><span class="description">One-time-initiation for this Class.</span><pre>init()</pre></a></li>
+<li class="method public "><a href="#method_isValidOptionName" title="isValidOptionName :: Checks if given name exists in default configuration."><span class="description">Checks if given name exists in default configuration.</span><pre>isValidOptionName()</pre></a></li>
+<li class="method public "><a href="#method_s3t" title="s3t :: Sets the given value to the linked target."><span class="description">Sets the given value to the linked target.</span><pre>s3t()</pre></a></li>
+<li class="method public "><a href="#method_set" title="set :: Changes a global configuration."><span class="description">Changes a global configuration.</span><pre>set()</pre></a></li>
+<li class="method public "><a href="#method_setHTMLInstance" title="setHTMLInstance :: Sets a instance of \Xiphe\HTML to the static class variable."><span class="description">Sets a instance of \Xiphe\HTML to the static class variable.</span><pre>setHTMLInstance()</pre></a></li>
+<li class="method public "><a href="#method_unsetHTMLInstance" title="unsetHTMLInstance :: Removes the last used instance of \Xiphe\HTML from static
+class variable."><span class="description">Removes the last used instance of \Xiphe\HTML from static
+class variable.</span><pre>unsetHTMLInstance()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private "><a href="#method__createSampleConfig" title="_createSampleConfig :: "><span class="description">_createSampleConfig()
+        </span><pre>_createSampleConfig()</pre></a></li></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul></ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="property private "><a href="#property__CurrentHTMLInstance" title="$_CurrentHTMLInstance :: Holds the instance of \Xiphe\HTML that performed the last call."><span class="description">Holds the instance of \Xiphe\HTML that performed the last call.</span><pre>$_CurrentHTMLInstance</pre></a></li>
+<li class="property private "><a href="#property__ajaxMode" title="$_ajaxMode :: Turn ajax mode on or off"><span class="description">Turn ajax mode on or off</span><pre>$_ajaxMode</pre></a></li>
+<li class="property private "><a href="#property__ajaxModeBackup" title="$_ajaxModeBackup :: Backup of global configuration when ajax-mode is activated."><span class="description">Backup of global configuration when ajax-mode is activated.</span><pre>$_ajaxModeBackup</pre></a></li>
+<li class="property private "><a href="#property__ajaxSettings" title="$_ajaxSettings :: Overload configuration for ajax mode."><span class="description">Overload configuration for ajax mode.</span><pre>$_ajaxSettings</pre></a></li>
+<li class="property private "><a href="#property__config" title="$_config :: The current global configuration."><span class="description">The current global configuration.</span><pre>$_config</pre></a></li>
+<li class="property private "><a href="#property__defaults" title="$_defaults :: The default configuration."><span class="description">The default configuration.</span><pre>$_defaults</pre></a></li>
+<li class="property private "><a href="#property__initiated" title="$_initiated :: Weather or not this class was initiated."><span class="description">Weather or not this class was initiated.</span><pre>$_initiated</pre></a></li>
+<li class="property private "><a href="#property__themasterSettings" title="$_themasterSettings :: Settings array for !THE MASTER."><span class="description">Settings array for !THE MASTER.</span><pre>$_themasterSettings</pre></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="span8">
+<a id="\Xiphe\HTML\core\Config"></a><ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
+</li>
+<li><a href="../namespaces/Xiphe.html">Xiphe</a></li>
+<li>
+<span class="divider">\</span><a href="../namespaces/Xiphe.HTML.html">HTML</a>
+</li>
+<li>
+<span class="divider">\</span><a href="../namespaces/Xiphe.HTML.core.html">core</a>
+</li>
+<li class="active">
+<span class="divider">\</span><a href="../classes/Xiphe.HTML.core.Config.html">Config</a>
+</li>
+</ul>
+<div class="element class">
+<p class="short_description">Config class</p>
+<div class="details">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>category</th>
+<td>Markup</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/Xiphe.HTML.html">Xiphe\HTML</a></td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="mailto:xiphe@gmx.de">Hannes Diercks</a></td>
+</tr>
+<tr>
+<th>license</th>
+<td><a href="http://www.gnu.org/licenses/gpl-2.0.txt">GNU GENERAL PUBLIC LICENSE</a></td>
+</tr>
+<tr>
+<th>link</th>
+<td><a href="https://github.com/Xiphe/-HTML">https://github.com/Xiphe/-HTML</a></td>
+</tr>
+</table>
+<h3>
+<i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_ajax"></a><div class="element clickable method public method_ajax" data-toggle="collapse" data-target=".method_ajax .collapse">
+<h2>Activates or deactivates the ajax mode.</h2>
+<pre>ajax(boolean $activate) : void</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$activate</h4>
+<code>boolean</code><p>turn it off or on.</p></div>
+</div></div>
+</div>
+<a id="method_get"></a><div class="element clickable method public method_get" data-toggle="collapse" data-target=".method_get .collapse">
+<h2>Getter for the current value for the requested key.</h2>
+<pre>get(string $key, boolean $preferGlobal) : mixed</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Setting hierarchy:
+ - Ajax setting (if Mode is on)
+ - Instance setting
+ - THEWPSETTING (if Xiphe\THEMASTER\core\THEWPSETTINGS exists)
+ - config.php setting (if exists)
+ - default.</p>
+
+<p>If the requested key is not existent on one layer the next one
+will be used.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>The name of the setting.</p></div>
+<div class="subelement argument">
+<h4>$preferGlobal</h4>
+<code>boolean</code><p>Eliminates the instance setting from hierarchy.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>The setting value.</div>
+</div></div>
+</div>
+<a id="method_getDefaults"></a><div class="element clickable method public method_getDefaults" data-toggle="collapse" data-target=".method_getDefaults .collapse">
+<h2>Returns the default configuration.</h2>
+<pre>getDefaults() : array</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>array</code></div>
+</div></div>
+</div>
+<a id="method_getHTMLInstance"></a><div class="element clickable method public method_getHTMLInstance" data-toggle="collapse" data-target=".method_getHTMLInstance .collapse">
+<h2>Retrieves the last used instance of \Xiphe\HTML from static
+class variable.</h2>
+<pre>getHTMLInstance() : <a href="../classes/Xiphe.HTML.html">\Xiphe\HTML</a></pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code><a href="../classes/Xiphe.HTML.html">\Xiphe\HTML</a></code></div>
+</div></div>
+</div>
+<a id="method_getThemasterSettings"></a><div class="element clickable method public method_getThemasterSettings" data-toggle="collapse" data-target=".method_getThemasterSettings .collapse">
+<h2>getThemasterSettings()
+        </h2>
+<pre>getThemasterSettings() </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method_init"></a><div class="element clickable method public method_init" data-toggle="collapse" data-target=".method_init .collapse">
+<h2>One-time-initiation for this Class.</h2>
+<pre>init(array $initArgs) : void</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Checks the config.php file and builds the global config.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$initArgs</h4>
+<code>array</code><p>additional configuration</p></div>
+</div></div>
+</div>
+<a id="method_isValidOptionName"></a><div class="element clickable method public method_isValidOptionName" data-toggle="collapse" data-target=".method_isValidOptionName .collapse">
+<h2>Checks if given name exists in default configuration.</h2>
+<pre>isValidOptionName(string $name) : boolean</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>string</code><p>check this.</p></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>boolean</code></div>
+</div></div>
+</div>
+<a id="method_s3t"></a><div class="element clickable method public method_s3t" data-toggle="collapse" data-target=".method_s3t .collapse">
+<h2>Sets the given value to the linked target.</h2>
+<pre>s3t(mixed $target, mixed $value) : void</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Allows '++' and '--' for increment or decrement the numeric target.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$target</h4>
+<code>mixed</code><p>&$target the place were the value should be set to.</p>
+</div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>the value.</p></div>
+</div></div>
+</div>
+<a id="method_set"></a><div class="element clickable method public method_set" data-toggle="collapse" data-target=".method_set .collapse">
+<h2>Changes a global configuration.</h2>
+<pre>set(string $key, mixed $value, boolean $preferGlobal) : boolean</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$key</h4>
+<code>string</code><p>the settings name</p></div>
+<div class="subelement argument">
+<h4>$value</h4>
+<code>mixed</code><p>the settings value</p></div>
+<div class="subelement argument">
+<h4>$preferGlobal</h4>
+<code>boolean</code><p>Eliminates the instance setting from hierarchy.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>boolean</code>weather or not the setting was set.</div>
+</div></div>
+</div>
+<a id="method_setHTMLInstance"></a><div class="element clickable method public method_setHTMLInstance" data-toggle="collapse" data-target=".method_setHTMLInstance .collapse">
+<h2>Sets a instance of \Xiphe\HTML to the static class variable.</h2>
+<pre>setHTMLInstance(\Xiphe\HTML $HTML) : void</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Thereby indicating that this instance does the last call.</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$HTML</h4>
+<code><a href="../classes/Xiphe.HTML.html">\Xiphe\HTML</a></code><p>&$HTML the last used instance.</p>
+</div>
+</div></div>
+</div>
+<a id="method_unsetHTMLInstance"></a><div class="element clickable method public method_unsetHTMLInstance" data-toggle="collapse" data-target=".method_unsetHTMLInstance .collapse">
+<h2>Removes the last used instance of \Xiphe\HTML from static
+class variable.</h2>
+<pre>unsetHTMLInstance() : void</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="method__createSampleConfig"></a><div class="element clickable method private method__createSampleConfig" data-toggle="collapse" data-target=".method__createSampleConfig .collapse">
+<h2>_createSampleConfig()
+        </h2>
+<pre>_createSampleConfig() </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<h3>
+<i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property__CurrentHTMLInstance"> </a><div class="element clickable property private property__CurrentHTMLInstance" data-toggle="collapse" data-target=".property__CurrentHTMLInstance .collapse">
+<h2>Holds the instance of \Xiphe\HTML that performed the last call.</h2>
+<pre>$_CurrentHTMLInstance : <a href="../classes/Xiphe.HTML.html">\Xiphe\HTML</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__ajaxMode"> </a><div class="element clickable property private property__ajaxMode" data-toggle="collapse" data-target=".property__ajaxMode .collapse">
+<h2>Turn ajax mode on or off</h2>
+<pre>$_ajaxMode : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__ajaxModeBackup"> </a><div class="element clickable property private property__ajaxModeBackup" data-toggle="collapse" data-target=".property__ajaxModeBackup .collapse">
+<h2>Backup of global configuration when ajax-mode is activated.</h2>
+<pre>$_ajaxModeBackup : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__ajaxSettings"> </a><div class="element clickable property private property__ajaxSettings" data-toggle="collapse" data-target=".property__ajaxSettings .collapse">
+<h2>Overload configuration for ajax mode.</h2>
+<pre>$_ajaxSettings : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__config"> </a><div class="element clickable property private property__config" data-toggle="collapse" data-target=".property__config .collapse">
+<h2>The current global configuration.</h2>
+<pre>$_config : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__defaults"> </a><div class="element clickable property private property__defaults" data-toggle="collapse" data-target=".property__defaults .collapse">
+<h2>The default configuration.</h2>
+<pre>$_defaults : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__initiated"> </a><div class="element clickable property private property__initiated" data-toggle="collapse" data-target=".property__initiated .collapse">
+<h2>Weather or not this class was initiated.</h2>
+<pre>$_initiated : boolean</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="property__themasterSettings"> </a><div class="element clickable property private property__themasterSettings" data-toggle="collapse" data-target=".property__themasterSettings .collapse">
+<h2>Settings array for !THE MASTER.</h2>
+<pre>$_themasterSettings : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"><p>Will be generated through initiation.</p></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
+            generated on 2012-11-06T00:49:28+01:00.<br></footer></div>
+</div>
+</body>
+</html>
