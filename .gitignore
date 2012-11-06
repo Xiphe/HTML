@@ -1,5 +1,5 @@
-\config.php
-\config-sample.php
+/config.php
+/config-sample.php
 *.class
 *.pyc
 *.pyo
