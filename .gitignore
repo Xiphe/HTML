@@ -1,7 +1,8 @@
+\config.php
+\config-sample.php
 *.class
 *.pyc
 *.pyo
 *.settings
 *.project
 *.DS_Store
-config.php

@@ -15,29 +15,29 @@ $prediction = <<<'EOD'
 array(14) {
   ["baseUrl"]=>
   string(2) "./"
-  ["tabs"]=>
-  int(0)
-  ["tab"]=>
-  string(1) "	"
-  ["tabWorth"]=>
-  int(4)
-  ["break"]=>
-  string(1) "
-"
   ["noComments"]=>
   bool(false)
   ["magicUrl"]=>
   bool(true)
   ["disable"]=>
   bool(false)
+  ["tabs"]=>
+  int(0)
+  ["tab"]=>
+  string(1) "	"
+  ["break"]=>
+  string(1) "
+"
+  ["debug"]=>
+  string(8) "disabled"
+  ["store"]=>
+  string(6) "global"
+  ["tabWorth"]=>
+  int(4)
   ["maxLineWidth"]=>
   int(140)
   ["minLineWidth"]=>
   int(50)
-  ["debug"]=>
-  bool(false)
-  ["store"]=>
-  string(6) "global"
   ["clean"]=>
   bool(false)
   ["cleanMode"]=>

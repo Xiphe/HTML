@@ -37,7 +37,7 @@ class Generator
         'f' => 'forbidInlineInner',
         'b' => 'bbContent', //deprecated
         'm' => 'markdown',
-        'p' => 'compress', //todo
+        'p' => 'compress',
         'c' => 'cleanContent',
         'n' => 'doNotCleanContent',
         't' => 'justGetObject',

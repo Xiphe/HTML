@@ -57,6 +57,9 @@ class Script extends HTML\BasicModule implements HTML\ModuleInterface
      */
     public function sure()
     {
+        if ($this->hasOption('start')) {
+            $this->addOption('doNotSelfQlose');
+        }
         if (empty($this->args[0])) {
             $this->args[0] = array();
         }

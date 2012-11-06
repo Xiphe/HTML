@@ -24,4 +24,3 @@ $HTML = new Xiphe\HTML(
 
 /* GO PLAY! */
 
-$HTML->s_div()->p('this is wrapped')->end();

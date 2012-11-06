@@ -53,6 +53,37 @@ class BasicModule
     }
 
     /**
+     * Adds an option to the Module
+     *
+     * @param string $option the new option
+     *
+     * @return void
+     */
+    public function addOption($option)
+    {
+        if (in_array($option, Generator::$tagOptionKeys)
+            && !$this->hasOption($option)
+        ) {
+            $this->options[] = $option;
+        }
+    }
+
+    /**
+     * Removes an option from the Module
+     *
+     * @param string $option the option that should be removed
+     *
+     * @return void
+     */
+    public function removeOption($option)
+    {
+        if ($this->hasOption($option)) {
+            $key = array_search($option, $this->options);
+            unset($this->options[$key]);
+        }
+    }
+
+    /**
      * Fallback method
      *
      * Can be overwritten by module to ensure that the module should be used.

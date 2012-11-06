@@ -47,6 +47,10 @@ class Input extends HTML\BasicModule implements HTML\ModuleInterface
         }
         $labelArgs = $this->_label;
 
+        if ($this->called == 'checkbox' && isset($this->args[2]) && $this->args[2]) {
+            $Tag->setAttrs(array('checked' => null));
+        }
+
         $Label = HTML\Generator::getLabel($labelArgs, $Tag);
 
         HTML\Generator::appendLabel($Label, $Tag, $labelArgs);

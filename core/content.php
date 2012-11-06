@@ -30,7 +30,7 @@ class Content
      */
     private static $_bbs = array(
         '/\*\*(.*)\*\*/Usi' => '<strong>$1</strong>',
-        '/([^:]+)\/\/(.*)([^:]+)\/\//Usi' => '$1<em>$2$3</em>', // TODO: FIX
+        '/([^:]+)\/\/(.*)([^:]+)\/\//Usi' => '$1<em>$2$3</em>',
         '/__(.*)__/Usi' => '<span class="underline">$1</span>',
         '/•••(.*)•••/Usi' => '<ul>•$1•</ul>',
         '/\|\|\|(.*)\|\|\|/Usi' => '<ol>•$1•</ol>',
@@ -66,11 +66,6 @@ class Content
 
         if ($Tag->hasOption('compress')) {
             self::compress($Tag->content);
-        }
-
-        if (!is_string($Tag->content)) {
-            var_dump($Tag);
-            die('%%nostring');
         }
 
         return $Tag->content;
@@ -119,9 +114,13 @@ class Content
     public static function compress(&$content)
     {
         // remove comments
+        $content = preg_replace('/\/\/.*[\r\n\n\r]/', '', $content);
         $content = preg_replace('/\/\*[^*]*\*+([^\/][^*]*\*+)*\//', '', $content);
         // remove tabs, spaces, newlines, etc.
-        $content = trim(preg_replace('/[\r\n\r\n\t\s]+/', ' ', $content));
+        $content = preg_replace('/[\r\n\r\n\t\s]+/', ' ', $content);
+        $content = preg_replace('/\s?([\{\}\(\);:])\s?/', '$1', $content);
+
+        $content = trim($content);
 
         return $content;
     }
