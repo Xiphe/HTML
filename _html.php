@@ -10,12 +10,12 @@
  */
 
 /*
-Plugin Name: !HTML
+Plugin Name: HTML
 Plugin URI: https://github.com/Xiphe/-HTML
 Description: A Plugin to provide global access to the HTML class
-Version: 2.0.0.2
+Version: 2.0.0.3
 Date: 2012-30-10 17:30:00 +02:00
-Author: Hannes Diercks
+Author: Hannes Diercks aka Xiphe
 Author URI: https://github.com/Xiphe/
 Update Server: http://plugins.red-thorn.de/v2/api/
 Branch: 2.0-alpha

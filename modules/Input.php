@@ -45,15 +45,23 @@ class Input extends HTML\BasicModule implements HTML\ModuleInterface
             $Tag = new HTML\Tag($this->called, array($this->args[0]), array('generate'));
             break;
         }
-        $labelArgs = $this->_label;
 
-        if ($this->called == 'checkbox' && isset($this->args[2]) && $this->args[2]) {
+        if ($this->called == 'checkbox' && isset($this->args[2])
+            && ($this->args[2] === true || $this->args[2] === 'on' || $this->args[2] === 1
+                || $this->args[2] === $Tag->attributes['id']
+                || (is_array($this->args[2]) && in_array($Tag->attributes['id'], $this->args[2]))
+            )
+        ) {
             $Tag->setAttrs(array('checked' => null));
         }
 
-        $Label = HTML\Generator::getLabel($labelArgs, $Tag);
+        if ($this->_label !== false) {
+            $Label = HTML\Generator::getLabel($this->_label, $Tag);
 
-        HTML\Generator::appendLabel($Label, $Tag, $labelArgs);
+            HTML\Generator::appendLabel($Label, $Tag, $labelArgs);
+        } else {
+            echo $Tag;
+        }
     }
 
     /**
@@ -63,6 +71,7 @@ class Input extends HTML\BasicModule implements HTML\ModuleInterface
      */
     public function sure()
     {
+
         $this->_label = null;
         switch ($this->called) {
         case 'textarea':
@@ -72,14 +81,10 @@ class Input extends HTML\BasicModule implements HTML\ModuleInterface
             $i = 1;
             break;
         }
-        if (!isset($this->args[$i])) {
-            return true;
-        } elseif ($this->args[$i] !== false) {
+        if (isset($this->args[$i])) {
             $this->_label = $this->args[$i];
-
-            return true;
         }
 
-        return false;
+        return true;
     }
 }

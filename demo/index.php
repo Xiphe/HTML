@@ -44,6 +44,7 @@ foreach ($Tests as $Test) {
 
     $HTML->s_li()->a($Test->name, '#'.str_replace('test_', '', $Test->ID))->end();
 }
+
 $HTML->end('.navigation')->s_footer('#info');
 
 $HTML->s_p();
