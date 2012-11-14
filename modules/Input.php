@@ -58,7 +58,7 @@ class Input extends HTML\BasicModule implements HTML\ModuleInterface
         if ($this->_label !== false) {
             $Label = HTML\Generator::getLabel($this->_label, $Tag);
 
-            HTML\Generator::appendLabel($Label, $Tag, $labelArgs);
+            HTML\Generator::appendLabel($Label, $Tag, $this->_label);
         } else {
             echo $Tag;
         }

@@ -30,7 +30,7 @@ class Close extends HTML\BasicModule implements HTML\ModuleInterface
      */
     public function execute()
     {
-        if (empty($this->args)) {
+        if (empty($this->args) || $this->args[0] == '')  {
             if (HTML\Store::hasTags()) {
                 HTML\Store::get('last')->close();
             }
@@ -62,6 +62,14 @@ class Close extends HTML\BasicModule implements HTML\ModuleInterface
                 if (isset(HTML\Store::get('last')->attributes['id'])
                     && HTML\Store::get('last')->attributes['id'] == substr($until, 1)
                 ) {
+                    $found = true;
+                }
+                HTML\Store::get('last')->close();
+            }
+        } elseif(!empty($until)) {
+            $found = false;
+            while (!$found && HTML\Store::hasTags()) {
+                if (HTML\Store::get('last')->name === $until) {
                     $found = true;
                 }
                 HTML\Store::get('last')->close();

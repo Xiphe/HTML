@@ -13,7 +13,7 @@
 Plugin Name: HTML
 Plugin URI: https://github.com/Xiphe/-HTML
 Description: A Plugin to provide global access to the HTML class
-Version: 2.0.0.3
+Version: 2.0.0.4
 Date: 2012-30-10 17:30:00 +02:00
 Author: Hannes Diercks aka Xiphe
 Author URI: https://github.com/Xiphe/
@@ -62,4 +62,15 @@ spl_autoload_register(
 if (!defined('HTMLCLASSAVAILABLE')) {
     $GLOBALS['HTML'] = new HTML();
     define('HTMLCLASSAVAILABLE', true);
+}
+
+if (class_exists('\WP') && HTML\core\Config::get('cleanwpoutput')) {
+    $startCleaning = function () {
+         ob_start();
+    };
+    $clean = function () {
+        HTML\core\Cleaner::clean(ob_get_clean());
+    };
+    add_action('wp_head', $startCleaning, 0, 0);
+    add_action('Xiphe\wp_head_end', $clean, 99, 0);
 }

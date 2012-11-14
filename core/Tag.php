@@ -272,6 +272,13 @@ class Tag
 
         $this->update();
         $this->update('content');
+
+        /*
+         * Execute Tag generated Hook if Wordpress is available.
+         */
+        if (class_exists('\WP')) {
+            call_user_func_array('do_action', array('Xiphe\HTML\TagCreated', &$this, Config::getHTMLInstance()));
+        }
     }
 
     /**

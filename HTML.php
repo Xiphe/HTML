@@ -181,6 +181,17 @@ class HTML
     }
 
     /**
+     * Shorthand for escape
+     *
+     * @param string $str input
+     *
+     * @return string
+     */
+    public function esc($str) {
+        return $this->escape($str);
+    }
+
+    /**
      * Constructor
      *
      * Sets the _ID and valid initiation arguments.

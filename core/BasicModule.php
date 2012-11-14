@@ -38,6 +38,13 @@ class BasicModule
         $this->args = &$args;
         $this->options = &$options;
         $this->called = &$called;
+
+        /*
+         * Execute Module generated Hook if Wordpress is available.
+         */
+        if (class_exists('\WP')) {
+            call_user_func_array('do_action', array('Xiphe\HTML\ModuleCreated', &$this, Config::getHTMLInstance()));
+        }
     }
 
     /**

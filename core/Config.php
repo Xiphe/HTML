@@ -422,6 +422,12 @@ EOD;
                     'default' => false,
                     'description' => __('No generation of HTML Tags.', 'html')
                 ),
+                'cleanwpoutput' => array(
+                    'label' => __('Clean Wordpress output', 'html'),
+                    'type' => 'checkbox',
+                    'default' => true,
+                    'description' => __('Cleans up things like the wp_head.', 'html')
+                ),
                 'sep',
                 'h3.1' => __('Advanced', 'html'),
                 'tabs' => array(
