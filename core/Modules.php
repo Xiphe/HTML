@@ -126,6 +126,10 @@ class Modules
      */
     public static function getModulePath()
     {
+        if (!defined('XIPHE_HTML_ROOT_FOLDER')) {
+            define('XIPHE_HTML_ROOT_FOLDER', dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR);
+        }
+
         return XIPHE_HTML_ROOT_FOLDER.'modules'.DIRECTORY_SEPARATOR;
     }
 

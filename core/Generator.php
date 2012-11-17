@@ -654,7 +654,7 @@ class Generator
          * Create and return the label object.
          */
 
-        return new Tag('label', array($labelArgs['inner'], $Tag->attributes['name']));
+        return new Tag('label', array($labelArgs['inner'], $Tag->attributes['id']));
     }
 
     /**

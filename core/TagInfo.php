@@ -47,6 +47,8 @@ class TagInfo
         'script' => 'src',
         'input' => 'name',
         'checkbox' => 'id',
+        'radio' => 'id',
+        'submit' => 'value',
         'select' => 'name',
         'textarea' => 'name',
         'pw' => 'name',
@@ -88,6 +90,7 @@ class TagInfo
     public static $doubleAttrs = array(
         'input' => array('id', 'name'),
         'checkbox' => array('id', 'name'),
+        'radio' => array('id', 'name'),
         'select' => array('id', 'name'),
         'pw' => array('id', 'name'),
         'textarea' => array('id', 'name'),
@@ -134,12 +137,19 @@ class TagInfo
         'checkbox' => array(
             'type' => 'checkbox'
         ),
+        'radio' => array(
+            'type' => 'radio'
+        ),
         'pw' => array(
             'type' => 'password'
         ),
         'hidden' => array(
             'type' => 'hidden',
             'name' => 'action'
+        ),
+        'submit' => array(
+            'type' => 'submit',
+            'name' => 'submit'
         ),
         'zw' => array(
             'class' => 'zerowrap'
@@ -221,6 +231,8 @@ class TagInfo
         'utf8' => 'meta',
         'pw' => 'input',
         'checkbox' => 'input',
+        'submit' => 'input',
+        'radio' => 'input',
         'css' => 'link',
         'less' => 'link',
         'rederect' => 'meta',

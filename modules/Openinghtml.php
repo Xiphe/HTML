@@ -125,7 +125,7 @@ class Openinghtml extends Core\BasicModule implements Core\ModuleInterface
     public function ieClass($before = '')
     {
         $sIeClass = '';
-        if (class_exists('Xiphe\THETOOLS')) {
+        if (class_exists('Xiphe\THEMASTER\core\THEMASTER')) {
             if (\Xiphe\THETOOLS::is_browser('ie')) {
                 if (\Xiphe\THETOOLS::is_browser('ie6x')) {
                     $sIeClass = $before.'lt-ie10 lt-ie9 lt-ie8 lt-ie7';
@@ -151,7 +151,7 @@ class Openinghtml extends Core\BasicModule implements Core\ModuleInterface
      */
     public function browserClass($before = '')
     {
-        if (class_exists('Xiphe\THETOOLS')) {
+        if (class_exists('Xiphe\THEMASTER\core\THEMASTER')) {
             $browser = str_replace(' ', '_', strtolower(\Xiphe\THETOOLS::get_browser()));
             $version = str_replace('.', '-', \Xiphe\THETOOLS::get_browserVersion());
             $engine = strtolower(\Xiphe\THETOOLS::get_layoutEngine());

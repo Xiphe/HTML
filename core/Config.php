@@ -111,6 +111,11 @@ class Config
     public static function init(array $initArgs = array())
     {
         if (!self::$_initiated) {
+            if (!defined('XIPHE_HTML_ROOT_FOLDER')) {
+                define('XIPHE_HTML_ROOT_FOLDER', dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR);
+            }
+
+            require_once XIPHE_HTML_ROOT_FOLDER.'corefunctions.php';
 
             foreach (self::getThemasterSettings() as $key => $s) {
                 if (is_array($s) && isset($s['default'])) {
@@ -163,6 +168,9 @@ class Config
      */
     public static function getDefaults()
     {
+        if (!self::$_initiated) {
+            self::init();
+        }
         return self::$_defaults;
     }
 
@@ -202,6 +210,10 @@ class Config
      */
     public static function get($key, $preferGlobal = false)
     {
+        if (!self::$_initiated) {
+            self::init();
+        }
+
         if (!isset(self::$_config[$key])) {
             return null;
         }
