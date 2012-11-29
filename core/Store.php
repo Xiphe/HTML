@@ -84,13 +84,19 @@ class Store
      *
      * @return Tag
      */
-    public static function get($ID)
+    public static function get($ID, $offset = 0)
     {
         if ($ID === 'last') {
+            if ($offset > 0) {
+                $offset = $offset*-1;
+            }
             if (Config::get('store') == 'global') {
-                return end(self::$_tagStore);
+                $k = array_splice(array_keys(self::$_tagStore), -1+$offset, 1);
+                return self::$_tagStore[$k[0]];
             } elseif (Config::get('store') == 'internal') {
-                return end(Config::getHTMLInstance()->tagStore);
+                $Store = Config::getHTMLInstance()->tagStore;
+                $k = array_splice(array_keys($Store), -1+$offset, 1);
+                return $Store[$k[0]];
             }
         } elseif (is_int($ID)) {
             if (Config::get('store') == 'global' && isset(self::$_tagStore[$ID])) {
@@ -135,5 +141,53 @@ class Store
         } elseif (Config::get('store') == 'internal') {
             return count(Config::getHTMLInstance()->tagStore);
         }
+    }
+
+    public static function has($tag = '')
+    {
+
+        if (empty($tag) || $tag === 'all') {
+            return self::hasTags();
+        }
+
+        if (is_int($tag)) {
+            return $tag <= self::hasTags();
+        } elseif (strpos($tag, '.') === 0) {
+            $found = false;
+            $i = 0;
+            while (self::hasTags() > $i*-1) {
+                if (self::get('last', $i)->hasClass(substr($tag, 1))) {
+                    $found = true;
+                    break;
+                }
+                $i--;
+            }
+            return $found;
+        } elseif (strpos($tag, '#') === 0) {
+            $found = false;
+            $i = 0;
+            while (self::hasTags() > $i*-1) {
+                if (isset(self::get('last', $i)->attributes['id'])
+                    && self::get('last', $i)->attributes['id'] == substr($tag, 1)
+                ) {
+                    $found = true;
+                    break;
+                }
+                $i--;
+            }
+            return $found;
+        } elseif(!empty($tag)) {
+            $found = false;
+            $i = 0;
+            while (self::hasTags() > $i*-1) {
+                if (self::get('last', $i)->name === $tag) {
+                    $found = true;
+                    break;
+                }
+                $i--;
+            }
+            return $found;
+        }
+        return false;
     }
 }

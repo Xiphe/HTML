@@ -29,7 +29,11 @@ class Close extends HTML\BasicModule implements HTML\ModuleInterface
      * @return void
      */
     public function execute()
-    {
+    {   
+        if (isset($this->args[1]) && $this->args[1] && !HTML\Store::has($this->args[0])) {
+            return;
+        }
+        
         if (empty($this->args) || $this->args[0] == '')  {
             if (HTML\Store::hasTags()) {
                 HTML\Store::get('last')->close();
