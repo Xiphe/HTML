@@ -142,6 +142,8 @@ class Modules
      */
     public static function exist($name)
     {
+        $name = ucfirst($name);
+
         /*
          * If it was checked before negatively - direct return.
          */
