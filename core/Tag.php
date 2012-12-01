@@ -227,7 +227,7 @@ class Tag
         /*
          * Set attributes and content according to options and self-closing
          */
-        if ($this->isSelfclosing() || $this->hasOption('start')) {
+        if ($this->isSelfclosing() || $this->hasOption('start') || is_array($args[0])) {
             $this->attributes = $args[0];
         } else {
             $this->content = $args[0];

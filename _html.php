@@ -13,7 +13,7 @@
 Plugin Name: HTML
 Plugin URI: https://github.com/Xiphe/-HTML
 Description: A Plugin to provide global access to the HTML class
-Version: 2.0.0.6
+Version: 2.0.0.7
 Date: 2012-30-10 17:30:00 +02:00
 Author: Hannes Diercks aka Xiphe
 Author URI: https://github.com/Xiphe/
