@@ -95,7 +95,8 @@ class Script extends HTML\BasicModule implements HTML\ModuleInterface
             return false;
         }
 
-        return !(substr($this->args[0], 0, 4) == 'http'
+        return is_array($this->args[0])
+         || !(substr($this->args[0], 0, 4) == 'http'
          || substr($this->args[0], 0, 3) == '../'
          || substr($this->args[0], 0, 3) == '\./'
          || substr($this->args[0], 0, 2) == './'
