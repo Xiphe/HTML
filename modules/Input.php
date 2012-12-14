@@ -39,7 +39,7 @@ class Input extends HTML\BasicModule implements HTML\ModuleInterface
     {
         switch ($this->called) {
         case 'textarea':
-            $Tag = new HTML\Tag($this->called, array($this->args[0], $this->args[1]), array('generate'));
+            $Tag = new HTML\Tag($this->called, array($this->args[0], $this->args[1]), array('generate', 'inlineInner'));
             break;
         default:
             $Tag = new HTML\Tag($this->called, array($this->args[0]), array('generate'));
