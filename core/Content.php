@@ -118,7 +118,7 @@ class Content
         $content = preg_replace('/\/\*[^*]*\*+([^\/][^*]*\*+)*\//', '', $content);
         // remove tabs, spaces, newlines, etc.
         $content = preg_replace('/[\r\n\r\n\t\s]+/', ' ', $content);
-        $content = preg_replace('/\s?([\{\}\(\);:])\s?/', '$1', $content);
+        $content = preg_replace('/\s?([\{\}\(\);:,])\s?/', '$1', $content);
 
         $content = trim($content);
 

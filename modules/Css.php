@@ -32,7 +32,7 @@ class Css extends HTML\BasicModule implements HTML\ModuleInterface
     {
         $options = $this->options;
         $options[] = 'doNotSelfQlose';
-        if (in_array('compressCss', $options)) {
+        if (in_array('compress', $options)) {
             $options[] = 'inlineInner';
         }
 
