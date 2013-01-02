@@ -8,7 +8,7 @@ If and how debuging should be handled.
 
 **false** skips every debug attempt
 **'Exception'** throws an Exception,
-**'THEDEBUG'** will try to use THEDEBUG from [!THE MASTER](https://github.com/Xiphe/-THE-MASTER)
+**'THEDEBUG'** will try to use THEDEBUG from [!THE MASTER](https://github.com/Xiphe/THEMASTER)
 
 **Type:** *string/boolean*
 **Default:** false

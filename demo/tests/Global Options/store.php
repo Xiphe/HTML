@@ -11,7 +11,9 @@ tabs opened by another instance. If an instance stores its opened tags internaly
 can not close them with the end() method.
 An Instance of HTML using the internal store is also unable to close globaly stored tags.
 This is usefull for Demos like this one. (all examples use internal storage so they do not
-distract the markup outside the <pre> tags.)
+distract the markup outside the &lt;pre\&gt; tags.)
+
+*This is just a demonstration of the possibilities. Normally you want to end(\'all\') when returning from an internal store to global.*
 
 **Type:** *string* ("global"/"internal")
 **Default:** "global"
@@ -20,7 +22,7 @@ EOD;
 $code = <<<'EOD'
 $HTML->s_div('#foo');
 $HTML->setOption('store', 'global'); // Reset to global because this demos use internal by default.
-$HTML->s_div('#bar');
+$HTML->s_p('#bar');
 $HTML->setOption('store', 'internal');
 $HTML->end(); // Ends #foo because it is the last opened tag from internal store.
 $HTML->setOption('store', 'global');
@@ -30,8 +32,8 @@ EOD;
 
 $prediction = <<<'EOD'
 <div id="foo">
-	<div id="bar">
+	<p id="bar">
 	</div><!-- #foo -->
-</div><!-- #bar -->
+</p><!-- #bar -->
 
 EOD;

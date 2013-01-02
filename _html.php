@@ -11,21 +11,34 @@
 
 /*
 Plugin Name: HTML
-Plugin URI: https://github.com/Xiphe/-HTML
-Description: A Plugin to provide global access to the HTML class
-Version: 2.0.0.7
-Date: 2012-30-10 17:30:00 +02:00
-Author: Hannes Diercks aka Xiphe
+Plugin URI: https://github.com/Xiphe/HTML
+Description: PHP-based HTML Markup generator
+Version: 2.0.0
+Date: 2013-01-02 13:00:00 +01:00
+Author: Hannes Diercks <info@xiphe.net>
+License: http://www.gnu.org/licenses/gpl-2.0.txt GNU GENERAL PUBLIC LICENSE
 Author URI: https://github.com/Xiphe/
 Update Server: http://plugins.red-thorn.de/v2/api/
-Branch: 2.0-alpha
 */
 
 namespace Xiphe;
 
+/*
+ * In development i use one central symlinked version of this plugin.
+ * Whenever something seems to be wrong i always uncomment this line
+ * to check if i use the latest version or if the link was broken
+ * through a sync process.
+ */
 // die('!HTML SYMLINKED');
 
+/*
+ * Register as updatable wordpress plugin (requires https://github.com/XIPHE/THEMASTER)
+ */
 $GLOBALS['Xiphe\THEMASTER\Updatable'][] = __FILE__;
+
+/*
+ * Register wordpress settings (requires https://github.com/XIPHE/THEMASTER)
+ */
 $GLOBALS['Xiphe\THEMASTER\Settings'][] = array(
     'file' => __FILE__,
     'name' => '!HTML',
@@ -34,12 +47,22 @@ $GLOBALS['Xiphe\THEMASTER\Settings'][] = array(
         'getThemasterSettings'
     )
 );
+
+/*
+ * Set internal constants.
+ */
 define('XIPHE_HTML_ROOT_FOLDER', dirname(__FILE__).DIRECTORY_SEPARATOR);
 define('XIPHE_HTML_LIB_FOLDER', XIPHE_HTML_ROOT_FOLDER.'lib'.DIRECTORY_SEPARATOR);
 define('XIPHE_HTML_TEXTID', basename(dirname(__FILE__)).'/'.basename(__FILE__));
 
+/*
+ * Include functions in the core namespace.
+ */
 include_once 'corefunctions.php';
 
+/*
+ * Register autoloading.
+ */
 spl_autoload_register(
     function ($class) {
         if (strpos($class, 'Xiphe\HTML\\') === 0) {
@@ -59,11 +82,17 @@ spl_autoload_register(
     }
 );
 
+/*
+ * Set the HTML global variable and define the availability constant.
+ */
 if (!defined('HTMLCLASSAVAILABLE')) {
     $GLOBALS['HTML'] = new HTML();
     define('HTMLCLASSAVAILABLE', true);
 }
 
+/*
+ * Register cleaning hooks for wordpress if wanted and wp is available.
+ */
 if (class_exists('\WP') && HTML\core\Config::get('cleanwpoutput')) {
     $startCleaning = function () {
          ob_start();

@@ -1,0 +1,37 @@
+### 1.4.9
++	$HTML->select now accepts arrays for options attributes.
++	$HTML->ajaxMode( true||false ) added for disabeling comments, tabs and breaks.
+
+### 1.4.8
++	$HTML->tag('fb', '.foo|#bar'); now available for <tag class="foo" id="bar">fb</tag>
+
+### 1.4.7
++	added viewport() & appleIcon()
++	renamed readme.txt into readme.md
++	added functionality: end() function now accepts tagnames, ids and first class parameters to 
+	end all tags until match.
+
+### 1.4.6
++	github init
++	"labels" first attr is now "for"
+
+### 1.4.5
++	Added checkbox($attrs, $label, $checked) && checkgroup() method
++	Fixed _add_label() bug, Strings are now ok for labels.
++	Added css() as alias to link & js() as alias to script
++	Added private _selfContainingTags property
+
+### 1.4.42
++	Bugfix for HTMLCleaner, now correctly accepts slashes in opening <a href="http://"[...] Tags
+
+### 1.4.41
++	Updates are now via THEMASTER
+
+### 1.4.4
++   Changed defining of the constant "HTMLCLASSAVAILABE" into class file.
+
+### 1.4
++   **First public version**
+
+### 1.0
++   Intern version *no details*

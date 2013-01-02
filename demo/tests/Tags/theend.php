@@ -4,7 +4,7 @@ $order = 50;
 $tags = 'tag, basic, end';
 
 $description = <<<'EOD'
-As mentioned [above](#startendtags): This method closes tags that have been opened by the **s_**prefix.
+As mentioned [above](#tags_startingandendingtags): This method closes tags that have been opened by the **s_**prefix.
 If you call it without arguments, it will close the last tag.
 If you call it with an integer, it will try to close as many tags,
 If you pass an #id or .class all tags including the one with the class or id will be closed.

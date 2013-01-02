@@ -1,13 +1,14 @@
 HTML - The clean code approach
 ==============================
 
-Author: Hannes Diercks  
-URL: http://www.red-thorn.de  
-Plugin Info: http://plugins.red-thorn.de/libary/!html/  
-Version: 1.4.8  
-Date: 2012-02-24 11:00:00  
+Author: Xiphe  
+URL: http://xiphe.net  
+Plugin Info: http://xiphe.net/html/  
+Plugin Code: https://github.com/XIPHE/HTML  
+Version:2.0.0  
+Date: 2013-01-02 13:00:00 +01:00  
 Requires: 3.0  
-Tested: 3.3.1  
+Tested: 3.5  
 
 
 
@@ -15,87 +16,65 @@ Tested: 3.3.1
 Description
 -----------
 
-This is a Wordpress Plugin that initializes the HTML and 
-HTMLCleaner Class and generates a global variable called HTML.
+### This is a PHP-based HTML Markup generator.
 
-This plugin is for other plugin-developers that want to use
-the HTML Class and does nothing by itself besides initiating
-the global and including the class files.
+The main benefits are:
 
-See [Demo Page](http://plugins.red-thorn.de/libary/!html/demo) for details
+* no switching between php and html or echoing of html strings needed when you are inside your php stuff.
+* Minimalistic attempt and helper functions. You should be able to generate more html markup with less php instructions while keeping full flexibility.
+* Auto-indention. Unless you turn it of to save whitespace you will receive beautifully indented and super-readable markup for your web-projects.
 
+The main downfalls are:
+
+* Page generation takes longer, because every html-tag will run through a lot of php functions while being generated.  
+(I use it along with wordpress and can not make a humanly noticeable difference in page loading speed when changing from a default wp-theme to one that uses the generator.)
+* It may be difficult to learn how to use this, compared to writing pure html.
+
+This project is inspired by the [CakePHP HtmlHelper](http://api.cakephp.org/class/html-helper).
+
+[Demo-/Testpage](http://html.xiphe.net/demo/)  
+[Documentation(phpDocumentor)](http://html.xiphe.net/doc/)
+
+
+
+
+3rd Party
+---------
+
+* **[PHP Diff Class](https://github.com/chrisboulton/php-diff)** by Chris Boulton (Used for the Demos/Tests will not be loaded in productive usage).
+* **[PHP Markdown](http://michelf.ca/projects/php-markdown/)** by Michel Fortin
+* **[phpDocumentor](http://www.phpdoc.org/)** was used to generate the documentation under /doc
 
 
 
 Installation
 ------------
 
+### Wordpress
+
 1. Upload the plugin directory to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
+### Standalone
+
+1. Include `_html.php`.
 
 
 
 Changelog
 ---------
 
-### 1.4.9
-+	$HTML->select now accepts arrays for options attributes.
-+	$HTML->ajaxMode( true||false ) added for disabeling comments, tabs and breaks.
+### 2.0.0
++   COMPLETE REMAKE. Most functionality should still work the same way as in 1.x but most likely not everything.
+	+   Introducing the Xiphe\HTML namespace
+	+   Better modular OOP Structure
+	+   Minimalistic Instances + most logic is now static.
+	+   Tag Instances
+	+   Test Cases
+	+   much more...
 
-### 1.4.8
-+	$HTML->tag('fb', '.foo|#bar'); now available for <tag class="foo" id="bar">fb</tag>
-
-### 1.4.7
-+	added viewport() & appleIcon()
-+	renamed readme.txt into readme.md
-+	added functionality: end() function now accepts tagnames, ids and first class parameters to 
-	end all tags until match.
-
-### 1.4.6
-+	github init
-+	"labels" first attr is now "for"
-
-### 1.4.5
-+	Added checkbox($attrs, $label, $checked) && checkgroup() method
-+	Fixed _add_label() bug, Strings are now ok for labels.
-+	Added css() as alias to link & js() as alias to script
-+	Added private _selfContainingTags property
-
-### 1.4.42
-+	Bugfix for HTMLCleaner, now correctly accepts slashes in opening <a href="http://"[...] Tags
-
-### 1.4.41
-+	Updates are now via THEMASTER
-
-### 1.4.4
-+   Changed defining of the constant "HTMLCLASSAVAILABE" into class file.
-
-### 1.4
-+   **First public version**
-
-### 1.0
-+   Intern version *no details*
-
-
-
-
-Upgrade Notice
---------------
-
-### 1.4.7
-+	github test
-
-### 1.4
-+   First stable & public version
-
-
-
-
-Known Bugs
-----------
-
-+   None ;)
+### pre 2.0
++   see changelog.txt
 
 
 
@@ -103,9 +82,8 @@ Known Bugs
 Todo
 ----
 
-### 1.4.43
-+	Add radio() & radiogroup()
-### 1.4.42
-+	Fix Closing Tabs in HTMLCleaner (see htmlcleaner.php Line 4)
-### 1.0
-+   Better Code Documentation
+* radio and checkbox group generation
+* Functionality to add own modules and manipulate the TagInfo Class.
+* More Test Cases
+* Still better documentation
+* Checking the Clean-Settings

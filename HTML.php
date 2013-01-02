@@ -51,7 +51,7 @@ class HTML
      * Getter for a HTML instance.
      *
      * Returns the first available instance in this order.
-     *  - last used intance
+     *  - last used instance
      *  - global instance
      *  - new instance
      *  

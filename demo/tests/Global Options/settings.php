@@ -8,7 +8,7 @@ There are multiple ways to set the global options.
 
 1. You can rename the config-sample.php in config.php and uncomment and adjust the settings
    to globaly overwrite the defaults.
-2. If you use this as a Wordpress plugin along with [!THE MASTER](https://github.com/Xiphe/-THE-MASTER)
+2. If you use this as a Wordpress plugin along with [!THE MASTER](https://github.com/Xiphe/THEMASTER)
    you can change the settings in the plugins tab.
 3. When creating a new intance of Xiphe\HTML you can pass an array of settings
    into the creation. Values set there will overwrite the global options just for this instance.
