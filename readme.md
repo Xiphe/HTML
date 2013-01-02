@@ -79,6 +79,15 @@ Changelog
 
 
 
+
+Bugs
+----
+
+* The fist line of a multi-lined &lt;li&gt; has a false indention when cleaned with strong mode. 
+
+
+
+
 Todo
 ----
 
@@ -86,4 +95,3 @@ Todo
 * Functionality to add own modules and manipulate the TagInfo Class.
 * More Test Cases
 * Still better documentation
-* Checking the Clean-Settings
