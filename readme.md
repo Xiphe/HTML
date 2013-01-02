@@ -21,7 +21,7 @@ Description
 The main benefits are:
 
 * no switching between php and html or echoing of html strings needed when you are inside your php stuff.
-* Minimalistic attempt and helper functions. You should be able to generate more html markup with less php instructions while keeping full flexibility.
+* Minimalistic usage attempt and helper functions. You should be able to generate more html markup with less php instructions while keeping full flexibility.
 * Auto-indention. Unless you turn it of to save whitespace you will receive beautifully indented and super-readable markup for your web-projects.
 
 The main downfalls are:
@@ -41,7 +41,7 @@ This project is inspired by the [CakePHP HtmlHelper](http://api.cakephp.org/clas
 3rd Party
 ---------
 
-* **[PHP Diff Class](https://github.com/chrisboulton/php-diff)** by Chris Boulton (Used for the Demos/Tests will not be loaded in productive usage).
+* **[PHP Diff Class](https://github.com/chrisboulton/php-diff)** by Chris Boulton (Used for the Demos/Tests. Will not be loaded in productive usage).
 * **[PHP Markdown](http://michelf.ca/projects/php-markdown/)** by Michel Fortin
 * **[phpDocumentor](http://www.phpdoc.org/)** was used to generate the documentation under /doc
 
