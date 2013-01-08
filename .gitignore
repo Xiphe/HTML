@@ -1,9 +1,0 @@
-/config.php
-/config-sample.php
-/sftp-config.json
-*.class
-*.pyc
-*.pyo
-*.settings
-*.project
-*.DS_Store
