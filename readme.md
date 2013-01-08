@@ -24,8 +24,8 @@ This project is inspired by the [CakePHP HtmlHelper](http://api.cakephp.org/clas
 3rd Party
 ---------
 
-* **[PHP Diff Class](https://github.com/chrisboulton/php-diff)** by Chris Boulton (Used for the Demos/Tests. Will not be loaded in productive usage).
-* **[PHP Markdown](http://michelf.ca/projects/php-markdown/)** by Michel Fortin
+* **[PHP Diff](https://packagist.org/packages/phpspec/php-diff)** by Chris Boulton (Used for the Demos/Tests. Will not be loaded in productive usage).
+* **[Markdown](https://packagist.org/packages/dflydev/markdown)** by Dragonfly Development Inc, Beau Simensen, Michel Fortin and John Gruber
 * **[phpDocumentor](http://www.phpdoc.org/)** was used to generate the documentation under /doc
 
 
@@ -35,17 +35,29 @@ Installation
 
 ### Wordpress
 
-1. Upload the plugin directory to the `/wp-content/plugins/` directory
+1. download the [latest "alldeps" branch]https://github.com/Xiphe/HTML/archive/alldeps.zip)
+1. Extract the archive and upload the plugin into the `/wp-content/plugins/` directory of your wordpress project.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
 ### Standalone
 
-1. Include `_html.php`.
+Use composer and require `"xiphe/html": "2.0.*"`
+
+or download the [latest "alldeps" branch](https://github.com/Xiphe/HTML/archive/alldeps.zip),
+extract it and put it anywhere in your php project.
+Then `require "[path to]/bootstrap.php"` or `require "[path to]/vendor/autoload.php"`.
 
 
 
 Changelog
 ---------
+
+### 2.0.2
++ composer update test.
+
+### 2.0.1
++ composer compatible.
++ now uses composer versions off php-diff and markdown.
 
 ### 2.0.0
 +   COMPLETE REMAKE. Most functionality should still work the same way as in 1.x but most likely not everything.
@@ -78,3 +90,4 @@ Todo
 * Functionality to add own modules and manipulate the TagInfo Class.
 * More Test Cases
 * Still better documentation
+* Array-style attribute maipulation on Tags would be nice. $Tag[id] = 'myID';
