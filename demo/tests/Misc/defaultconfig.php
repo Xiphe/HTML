@@ -12,7 +12,7 @@ var_dump(Xiphe\HTML\core\Config::getDefaults());
 EOD;
 
 $prediction = <<<'EOD'
-array(15) {
+array(17) {
   ["baseUrl"]=>
   string(2) "./"
   ["noComments"]=>
@@ -23,6 +23,10 @@ array(15) {
   bool(false)
   ["cleanwpoutput"]=>
   bool(true)
+  ["translator"]=>
+  string(2) "__"
+  ["textdomain"]=>
+  string(4) "html"
   ["tabs"]=>
   int(0)
   ["tab"]=>
