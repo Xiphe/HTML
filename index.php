@@ -9,7 +9,7 @@
  * @link     https://github.com/Xiphe/-HTML
  */
 
-include 'bootstap.php';
+include 'bootstrap.php';
 global $HTML;
 $HTML->setOption('cleanMode', 'strong');
 $HTML->HTML5()
