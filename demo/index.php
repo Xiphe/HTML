@@ -2,7 +2,7 @@
 // error_reporting( E_ALL );
 // ini_set( 'display_errors', 1 );
 
-include 'initdemo.php';
+include 'bootstrap.php';
 
 $HTML->s_body('id=tests')->s_div('.content');
 

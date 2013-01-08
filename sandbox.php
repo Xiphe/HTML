@@ -12,7 +12,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once '_html.php';
+require_once 'bootstrap.php';
+
 $HTML = new Xiphe\HTML(
     array(
         'debug' => 'Exception',
@@ -23,3 +24,4 @@ $HTML = new Xiphe\HTML(
 );
 
 /* GO PLAY! */
+$HTML->HTML5();

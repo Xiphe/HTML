@@ -1,0 +1,23 @@
+{
+	"name": "xiphe/html",
+    "type": "markup",
+    "keywords": ["markup", "html", "generator"],
+    "description": "PHP-based HTML Markup generator",
+    "homepage": "https://github.com/Xiphe/HTML",
+    "license": "GNU GENERAL PUBLIC LICENSE",
+    "authors": [
+        {
+            "name": "Hannes 'Xiphe' Diercks",
+            "email": "info@xiphe.net",
+            "homepage": "http://xiphe.net"
+        }
+    ],
+    "require": {
+        "phpspec/php-diff": "dev-master",
+        "dflydev/markdown": "~1.0",
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-0": { "Xiphe\\HTML": "src" }
+    }
+}

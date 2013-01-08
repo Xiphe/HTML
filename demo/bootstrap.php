@@ -1,6 +1,6 @@
 <?php
 $s_mt = explode(" ",microtime());
-require_once '../_html.php';
+require_once '../bootstrap.php';
 
 // INITIATION
 global $HTML;

@@ -111,11 +111,9 @@ class Config
     public static function init(array $initArgs = array())
     {
         if (!self::$_initiated) {
-            if (!defined('XIPHE_HTML_ROOT_FOLDER')) {
-                define('XIPHE_HTML_ROOT_FOLDER', dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR);
+            if (!defined('XIPHE_HTML_BASE_FOLDER')) {
+                define('XIPHE_HTML_BASE_FOLDER', dirname(__DIR__).DIRECTORY_SEPARATOR);
             }
-
-            require_once XIPHE_HTML_ROOT_FOLDER.'corefunctions.php';
 
             foreach (self::getThemasterSettings() as $key => $s) {
                 if (is_array($s) && isset($s['default'])) {
@@ -127,13 +125,13 @@ class Config
              * Get the config array from config.php
              */
             $config = array();
-            if (file_exists(XIPHE_HTML_ROOT_FOLDER.'config.php')) {
+            if (file_exists(XIPHE_HTML_BASE_FOLDER.'config.php')) {
                 call_user_func(
                     function () use (&$config) {
-                        include XIPHE_HTML_ROOT_FOLDER.'config.php';
+                        include XIPHE_HTML_BASE_FOLDER.'config.php';
                     }
                 );
-            } elseif(!file_exists(XIPHE_HTML_ROOT_FOLDER.'config-sample.php')) {
+            } elseif(!file_exists(XIPHE_HTML_BASE_FOLDER.'config-sample.php')) {
                 self::_createSampleConfig();
             }
 
@@ -340,7 +338,7 @@ class Config
  * @link     https://github.com/Xiphe/-HTML/blob/master/HTML.php
  */
 
-namespace Xiphe/HTML;
+namespace Xiphe\HTML;
 
 $config = array(
 
@@ -394,7 +392,7 @@ EOD;
 
         $r = rtrim(rtrim($r), ',')."\n);";
 
-        file_put_contents(XIPHE_HTML_ROOT_FOLDER.'config-sample.php', $r);
+        file_put_contents(XIPHE_HTML_BASE_FOLDER.'config-sample.php', $r);
     }
 
     public static function getThemasterSettings()

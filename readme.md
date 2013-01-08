@@ -1,22 +1,5 @@
-HTML - The clean code approach
-==============================
-
-Author: Xiphe  
-URL: http://xiphe.net  
-Plugin Info: http://xiphe.net/html/  
-Plugin Code: https://github.com/XIPHE/HTML  
-Version:2.0.0  
-Date: 2013-01-02 13:00:00 +01:00  
-Requires: 3.0  
-Tested: 3.5  
-
-
-
-
-Description
------------
-
-### This is a PHP-based HTML Markup generator.
+HTML - a PHP-based HTML Markup generator
+========================================
 
 The main benefits are:
 

@@ -2,7 +2,7 @@
 
 namespace Xiphe\HTML\demo;
 
-class testcase
+class TestCase
 {
     public $name;
     public $section;
@@ -138,8 +138,6 @@ class testcase
         global $HTML;
         $HTML->p('Diff', '.label');
 
-        require_once(XIPHE_HTML_LIB_FOLDER.'php-diff/lib/Diff.php');
-
         $a = explode("\n", $this->prediction);
         $b = explode("\n", $this->_result);
 
@@ -151,7 +149,6 @@ class testcase
         // Initialize the diff class
         $diff = new \Diff($a, $b, $options);
 
-        require_once(XIPHE_HTML_LIB_FOLDER.'php-diff/lib/Diff/Renderer/Html/Inline.php');
         $renderer = new \Diff_Renderer_Html_Inline;
         echo $diff->render($renderer);
     }

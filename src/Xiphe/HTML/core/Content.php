@@ -22,6 +22,9 @@ namespace Xiphe\HTML\core;
  */
 class Content
 {
+
+    public static $MarkdownParser = null;
+
     /**
      * Self-made, BB-Code'ish replacements
      *
@@ -104,11 +107,17 @@ class Content
      */
     public static function markdown(&$content)
     {
-        if (!function_exists('Markdown')) {
-            include XIPHE_HTML_LIB_FOLDER.'PHPMarkdown'.DIRECTORY_SEPARATOR.'markdown.php';
+        if (self::$MarkdownParser === null) {
+            if (class_exists('dflydev\markdown\MarkdownParser')) {
+                self::$MarkdownParser = new \dflydev\markdown\MarkdownParser;
+            } else {
+                self::$MarkdownParser = false;
+            }
         }
 
-        $content = trim(\Markdown($content));
+        if (self::$MarkdownParser !== false) {
+            $content = trim(self::$MarkdownParser->transformMarkdown($content));
+        }
 
         return $content;
     }

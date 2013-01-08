@@ -91,11 +91,11 @@ class Store
                 $offset = $offset*-1;
             }
             if (Config::get('store') == 'global') {
-                $k = array_splice(array_keys(self::$_tagStore), -1+$offset, 1);
+                $k = array_splice(@array_keys(self::$_tagStore), -1+$offset, 1);
                 return self::$_tagStore[$k[0]];
             } elseif (Config::get('store') == 'internal') {
                 $Store = Config::getHTMLInstance()->tagStore;
-                $k = array_splice(array_keys($Store), -1+$offset, 1);
+                $k = array_splice(@array_keys($Store), -1+$offset, 1);
                 return $Store[$k[0]];
             }
         } elseif (is_int($ID)) {
