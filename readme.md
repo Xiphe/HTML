@@ -24,8 +24,8 @@ This project is inspired by the [CakePHP HtmlHelper](http://api.cakephp.org/clas
 3rd Party
 ---------
 
-* **[PHP Diff Class](https://github.com/chrisboulton/php-diff)** by Chris Boulton (Used for the Demos/Tests. Will not be loaded in productive usage).
-* **[PHP Markdown](http://michelf.ca/projects/php-markdown/)** by Michel Fortin
+* **[PHP Diff](https://packagist.org/packages/phpspec/php-diff)** by Chris Boulton (Used for the Demos/Tests. Will not be loaded in productive usage).
+* **[Markdown](https://packagist.org/packages/dflydev/markdown)** by Dragonfly Development Inc, Beau Simensen, Michel Fortin and John Gruber
 * **[phpDocumentor](http://www.phpdoc.org/)** was used to generate the documentation under /doc
 
 
@@ -46,6 +46,10 @@ Installation
 
 Changelog
 ---------
+
+### 2.0.1
++ composer compatible.
++ now uses composer versions off php-diff and markdown.
 
 ### 2.0.0
 +   COMPLETE REMAKE. Most functionality should still work the same way as in 1.x but most likely not everything.
