@@ -442,6 +442,22 @@ EOD;
                 ),
                 'sep',
                 'h3.1' => __('Advanced', 'html'),
+                'translator' => array(
+                    'label' => __('Translator', 'html'),
+                    'type' => 'input',
+                    'default' => '__',
+                    'validation' => function ($v) {
+                        return is_callable($v);
+                    },
+                    'errorMessage' => __('Value has to be a valid callback function.', 'html'),
+                    'description' => __('Default callback that handles the translation of content.', 'html')
+                ),
+                'textdomain' => array(
+                    'label' => __('Textdomain', 'html'),
+                    'type' => 'input',
+                    'default' => 'html',
+                    'description' => __('Default textdomain. Used to identify the script that initiates the translation.', 'html')
+                ),
                 'tabs' => array(
                     'label' => __('Starting tabcount', 'html'),
                     'type' => 'input',

@@ -29,21 +29,22 @@ class Generator
      * @var array
      */
     public static $tagOptionKeys = array(
+        'b' => 'bbContent', //deprecated
+        'c' => 'cleanContent',
+        'd' => 'doNotSelfQlose',
+        'f' => 'forbidInlineInner',
         'g' => 'generate',
-        'r' => 'return',
-        's' => 'start',
         'i' => 'inline',
         'l' => 'inlineInner',
-        'f' => 'forbidInlineInner',
-        'b' => 'bbContent', //deprecated
         'm' => 'markdown',
-        'p' => 'compress',
-        'c' => 'cleanContent',
         'n' => 'doNotCleanContent',
-        't' => 'justGetObject',
         'o' => 'getObject',
+        'p' => 'compress',
         'q' => 'selfQlose',
-        'd' => 'doNotSelfQlose'
+        'r' => 'return',
+        's' => 'start',
+        't' => 'justGetObject',
+        'x' => 'translate'
     );
 
     /**

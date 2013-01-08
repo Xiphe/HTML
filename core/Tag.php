@@ -237,14 +237,6 @@ class Tag
         }
 
         /*
-         * Additional Arguments were passed - try to sprintf them.
-         */
-        if (isset($this->content) && count($args) > 2) {
-            array_splice($args, 0, 2);
-            $this->content = vsprintf($this->content, $args);
-        }
-
-        /*
          * Add Default Options
          */
         Generator::addDefaultOptions($this);
@@ -272,6 +264,14 @@ class Tag
 
         $this->update();
         $this->update('content');
+
+        /*
+         * Additional Arguments were passed - try to sprintf them.
+         */
+        if (isset($this->content) && count($args) > 2) {
+            array_splice($args, 0, 2);
+            $this->content = vsprintf($this->content, $args);
+        }
 
         /*
          * Execute Tag generated Hook if Wordpress is available.

@@ -55,6 +55,16 @@ class Content
      */
     public static function parse(Tag &$Tag)
     {
+        if (!empty($Tag->content) && $Tag->hasOption('translate') && is_callable(Config::get('translator'))) {
+            $Tag->content = call_user_func_array(
+                Config::get('translator'),
+                array(
+                    $Tag->content,
+                    Config::get('textdomain')
+                )
+            );
+        }
+        
         if ($Tag->hasOption('bbContent')) {
             self::bb($Tag->content);
         }
