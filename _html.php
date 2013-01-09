@@ -48,6 +48,7 @@ $GLOBALS['Xiphe\THEMASTER\Settings'][] = array(
     )
 );
 
+define('XIPHE_HTML_TEXTID', basename(dirname(__FILE__)).'/'.basename(__FILE__));
 require_once 'bootstrap.php';
 
 /*
