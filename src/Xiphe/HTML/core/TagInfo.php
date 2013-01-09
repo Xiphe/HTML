@@ -75,6 +75,14 @@ class TagInfo
         'pre' => array(
             'doNotCleanContent',
             'inlineInner'
+        ),
+        'if' => array(
+            'doNotCleanContent',
+            'inlineInner'
+        ),
+        'endif' => array(
+            'doNotCleanContent',
+            'inlineInner'
         )
     );
 
@@ -212,6 +220,20 @@ class TagInfo
         'comment' => array(
             'start' => '<!-- ',
             'end' => ' -->',
+            'close_start' => '',
+            'close_short' => '',
+            'close_end' => ''
+        ),
+        'if' => array(
+            'start' => '<!--[if ',
+            'end' => ']>',
+            'close_start' => '',
+            'close_short' => '',
+            'close_end' => ''
+        ),
+        'endif' => array(
+            'start' => '<![endif',
+            'end' => ']-->',
             'close_start' => '',
             'close_short' => '',
             'close_end' => ''

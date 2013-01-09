@@ -1,3 +1,9 @@
+Old Changes
+===========
+
+The changes for the current version are found in the readme.md
+
+
 ### 1.4.9
 +	$HTML->select now accepts arrays for options attributes.
 +	$HTML->ajaxMode( true||false ) added for disabeling comments, tabs and breaks.

@@ -57,7 +57,9 @@ class Modules
         'checkbox' => 'input',
         'radio' => 'input',
         'pw' => 'input',
-        'ol' => 'ul'
+        'ol' => 'ul',
+        'if' => 'ifendif',
+        'endif' => 'ifendif'
     );
 
     /**

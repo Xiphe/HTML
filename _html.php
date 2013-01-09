@@ -13,13 +13,12 @@
 Plugin Name: HTML
 Plugin URI: https://github.com/Xiphe/HTML
 Description: PHP-based HTML Markup generator
-Version: 2.0.2
+Version: 2.0.3
 Date: 2013-01-02 13:00:00 +01:00
 Author: Hannes Diercks <info@xiphe.net>
 License: http://www.gnu.org/licenses/gpl-2.0.txt GNU GENERAL PUBLIC LICENSE
 Author URI: https://github.com/Xiphe/
 Update Server: http://plugins.red-thorn.de/v2/api/
-Branch: alldeps
 */
 
 namespace Xiphe;

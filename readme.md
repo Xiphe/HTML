@@ -35,7 +35,7 @@ Installation
 
 ### Wordpress
 
-1. download the [latest "alldeps" branch]https://github.com/Xiphe/HTML/archive/alldeps.zip)
+1. Download the [latest "alldeps" branch](https://github.com/Xiphe/HTML/archive/alldeps.zip)
 1. Extract the archive and upload the plugin into the `/wp-content/plugins/` directory of your wordpress project.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
@@ -45,12 +45,18 @@ Use composer and require `"xiphe/html": "2.0.*"`
 
 or download the [latest "alldeps" branch](https://github.com/Xiphe/HTML/archive/alldeps.zip),
 extract it and put it anywhere in your php project.
-Then `require "[path to]/bootstrap.php"` or `require "[path to]/vendor/autoload.php"`.
+Then include `[path to]/bootstrap.php` or `[path to]/vendor/autoload.php`.
 
 
 
 Changelog
 ---------
+
+### 2.0.3
++ if() and endif() pseudotags
++ BasicModule::generate() generates a default tag using the module parameters.
++ When Generator::call is called directly, tag options can now be passed as a third argument
+	in addition to prefix them to the Tag
 
 ### 2.0.2
 + composer update test.
