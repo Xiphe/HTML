@@ -15,7 +15,6 @@
 define('XIPHE_HTML_ROOT_FOLDER', __DIR__.DIRECTORY_SEPARATOR);
 define('XIPHE_HTML_BASE_FOLDER', XIPHE_HTML_ROOT_FOLDER.'src'.
     DIRECTORY_SEPARATOR.'Xiphe'.DIRECTORY_SEPARATOR.'HTML'.DIRECTORY_SEPARATOR);
-define('XIPHE_HTML_TEXTID', basename(__DIR__).'/'.basename(__FILE__));
 
 /*
  * Include functions in the core namespace.
