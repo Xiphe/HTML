@@ -164,7 +164,7 @@ class Generator
      * 
      * @return mixed  null or Tag instance or string
      */
-    public static function call($method, $args = array())
+    public static function call($method, $args = array(), $addedOptions = array())
     {
         /*
          * Return if not enabled.
@@ -208,6 +208,21 @@ class Generator
         }
         $options = $tmp;
         unset($tmp);
+
+        /*
+         * Verify options passed indirectly to the generator (by a module for example).
+         */
+        foreach ($addedOptions as $key => $option) {
+            if (!in_array($option, self::$tagOptionKeys)) {
+                unset($addedOptions[$key]);
+            }
+        }
+
+        /*
+         * Merge all options.
+         */
+        $options = array_merge($options, $addedOptions);
+        unset($addedOptions);
 
         $called = $tag;
         Modules::appendAlias($tag);

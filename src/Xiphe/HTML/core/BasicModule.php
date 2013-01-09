@@ -101,4 +101,14 @@ class BasicModule
     {
         return true;
     }
+
+    /**
+     * Generates a default tag using the current module parameters.
+     * 
+     * @return void
+     */
+    final public function generate() {
+        $options = array_merge($this->options, (array) 'generate');
+        Generator::call($this->called, $this->args, $options);
+    }
 }

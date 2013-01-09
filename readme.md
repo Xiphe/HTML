@@ -52,6 +52,12 @@ Then include `[path to]/bootstrap.php` or `[path to]/vendor/autoload.php`.
 Changelog
 ---------
 
+### 2.0.3
++ if() and endif() pseudotags
++ BasicModule::generate() generates a default tag using the module parameters.
++ When Generator::call is called directly, tag options can now be passed as a third argument
+	in addition to prefix them to the Tag
+
 ### 2.0.2
 + composer update test.
 

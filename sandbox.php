@@ -24,4 +24,3 @@ $HTML = new Xiphe\HTML(
 );
 
 /* GO PLAY! */
-$HTML->HTML5();
