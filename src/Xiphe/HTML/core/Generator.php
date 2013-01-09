@@ -44,6 +44,7 @@ class Generator
         'r' => 'return',
         's' => 'start',
         't' => 'justGetObject',
+        'v' => 'dontValidateAttrs',
         'x' => 'translate'
     );
 
@@ -376,8 +377,13 @@ class Generator
                         /*
                          * use the key from TagInfo::$singleAttrkeys
                          */
-                        $attr[1] = $attr[0];
-                        $attr[0] = self::getSingleAttrKey($Tag);
+                        $key = self::getSingleAttrKey($Tag);
+                        if (false !== $key) {
+                            $attr[1] = $attr[0];
+                            $attr[0] = $key;
+                        } else {
+                            $attr[1] = null;
+                        }
                     }
                 } elseif (isset($Tag) && ($t = self::getKeyAlias($attr))) {
                     extract($t);
@@ -801,7 +807,7 @@ class Generator
              * Validate the attribute name.
              */
             $tmp = $key;
-            if (!self::ensureAttrNameValidation($key)) {
+            if (!$Tag->hasOption('dontValidateAttrs') && !self::ensureAttrNameValidation($key)) {
                 self::debug(sprintf('Invalid attribute name "%s" was changed to "%s"', $tmp, $key), 2, 7);
             }
 
@@ -810,7 +816,7 @@ class Generator
              */
             if (!empty($value)) {
                 $tmp = $value;
-                if (!self::ensureAttrValueValidation($value)) {
+                if (!$Tag->hasOption('dontValidateAttrs') && !self::ensureAttrValueValidation($value)) {
                     self::debug(sprintf('Dangerous attribute value "%s" was changed to "%s"', $tmp, $value), 2, 7);
                 }
                 $value = str_replace('"', '&quot;', $value);

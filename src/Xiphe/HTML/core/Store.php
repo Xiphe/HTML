@@ -80,13 +80,13 @@ class Store
      *
      * Checks if configuration is set to internal
      *
-     * @param mixed $ID Tag ID or 'last' for the last stored tag.
+     * @param mixed $ID Tag ID or 'latest' for the latest tag stored.
      *
      * @return Tag
      */
-    public static function get($ID, $offset = 0)
+    public static function get($ID = 'latest', $offset = 0)
     {
-        if ($ID === 'last') {
+        if ($ID === 'latest') {
             if ($offset > 0) {
                 $offset = $offset*-1;
             }

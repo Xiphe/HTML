@@ -63,7 +63,8 @@ class TagInfo
         'appleicon' => 'href',
         'abbr' => 'title',
         'action' => 'value',
-        'description' => 'content'
+        'description' => 'content',
+        'if' => false
     );
 
     /**
@@ -77,13 +78,9 @@ class TagInfo
             'inlineInner'
         ),
         'if' => array(
-            'doNotCleanContent',
-            'inlineInner'
+            'start',
+            'dontValidateAttrs'
         ),
-        'endif' => array(
-            'doNotCleanContent',
-            'inlineInner'
-        )
     );
 
     /**
@@ -194,6 +191,18 @@ class TagInfo
             'name' => 'description'
         )
     );
+    
+    /**
+     * Default callbacks for tags can be set here.
+     *
+     * @var array
+     */
+    public static $defaultCallbacks = array(
+        'if' => array(
+            'opened' => array('Xiphe\HTML\core\Config', 'killComments'),
+            'closed' => array('Xiphe\HTML\core\Config', 'reanimateComments')
+        )
+    );
 
     /**
      * These are the default brackets for any HTML Tag.
@@ -225,18 +234,11 @@ class TagInfo
             'close_end' => ''
         ),
         'if' => array(
-            'start' => '<!--[if ',
-            'end' => ']>',
-            'close_start' => '',
-            'close_short' => '',
-            'close_end' => ''
-        ),
-        'endif' => array(
-            'start' => '<![endif',
-            'end' => ']-->',
-            'close_start' => '',
-            'close_short' => '',
-            'close_end' => ''
+            'start' => '<!--[if',
+            'end' => '<![endif',
+            'close_start' => ']>',
+            'close_short' => ']>',
+            'close_end' => ']-->'
         ),
         'script' => array(
             'start' => '<:name',
