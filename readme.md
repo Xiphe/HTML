@@ -52,6 +52,9 @@ Then include `[path to]/bootstrap.php` or `[path to]/vendor/autoload.php`.
 Changelog
 ---------
 
+### 2.0.4
++ fixed wp textdomain error 
+
 ### 2.0.3
 + if() and endif() pseudotags
 + BasicModule::generate() generates a default tag using the module parameters.
