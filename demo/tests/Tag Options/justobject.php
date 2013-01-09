@@ -15,7 +15,7 @@ EOD;
 $prediction = <<<'EOD'
 Xiphe\HTML\core\Tag Object
 (
-    [ID] => 185
+    [ID] => 189
     [name] => div
     [realName] => div
     [options] => Array
@@ -48,6 +48,15 @@ Xiphe\HTML\core\Tag Object
     [_opened:Xiphe\HTML\core\Tag:private] => 
     [_closed:Xiphe\HTML\core\Tag:private] => 
     [_contentPrinted:Xiphe\HTML\core\Tag:private] => 
+    [_configuration:protected] => 
+    [_initArgs:protected] => Array
+        (
+        )
+
+    [_callbacks:protected] => Array
+        (
+        )
+
 )
 
 EOD;

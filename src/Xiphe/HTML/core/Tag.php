@@ -20,7 +20,7 @@ namespace Xiphe\HTML\core;
  * @license  http://www.gnu.org/licenses/gpl-2.0.txt GNU GENERAL PUBLIC LICENSE
  * @link     https://github.com/Xiphe/-HTML
  */
-class Tag
+class Tag extends \Xiphe\Base
 {
     /**
      * TagStore ID of this Tag.
@@ -211,6 +211,8 @@ class Tag
             }
         }
 
+        $this->bindDefaultCallbacks();
+
         /*
          * Default to empty array if no arguments were passed.
          */
@@ -225,6 +227,11 @@ class Tag
         }
 
         /*
+         * Add Default Options
+         */
+        Generator::addDefaultOptions($this);
+        
+        /*
          * Set attributes and content according to options and self-closing
          */
         if ($this->isSelfclosing() || $this->hasOption('start') || is_array($args[0])) {
@@ -235,11 +242,6 @@ class Tag
                 $this->attributes = $args[1];
             }
         }
-
-        /*
-         * Add Default Options
-         */
-        Generator::addDefaultOptions($this);
 
         if ((empty($this->content) && !$this->hasOption('start'))
             || $this->hasOption('inlineInner')
@@ -336,6 +338,15 @@ class Tag
              * Parse the attributes to string format.
              */
             $this->attributeString = Generator::attsToString($this);
+        }
+    }
+
+    public function bindDefaultCallbacks()
+    {
+        if (isset(TagInfo::$defaultCallbacks[$this->name])) {
+            foreach (TagInfo::$defaultCallbacks[$this->name] as $hook => $cb) {
+                $this->addCallback($hook, $cb);
+            }
         }
     }
 
@@ -442,6 +453,7 @@ class Tag
         if ($this->isSelfclosing()) {
             echo str_replace(':name', $this->realName, $this->brackets['close_short']);
             $this->_closed = true;
+            $this->doCallback('closed');
             $this->destroy();
             if (!$this->hasOption('inline')) {
                 Generator::lineBreak();
@@ -449,6 +461,7 @@ class Tag
             $this->_contentPrinted = true;
         } else {
             echo str_replace(':name', $this->realName, $this->brackets['close_start']);
+            $this->doCallback('opened');
             if (!$this->inlineInner && !$this->hasOption('inline')) {
                 Config::set('tabs', '++');
                 Generator::lineBreak();
@@ -488,6 +501,7 @@ class Tag
         }
 
         echo str_replace(':name', $this->realName, $this->brackets['close_end']);
+        $this->doCallback('closed');
         if (!$this->hasOption('inline')) {
             if (!$this->inlineInner) {
                 $this->closingComment();

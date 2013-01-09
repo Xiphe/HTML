@@ -36,7 +36,7 @@ class Close extends HTML\BasicModule implements HTML\ModuleInterface
         
         if (empty($this->args) || $this->args[0] == '')  {
             if (HTML\Store::hasTags()) {
-                HTML\Store::get('last')->close();
+                HTML\Store::get()->close();
             }
 
             return;
@@ -45,38 +45,38 @@ class Close extends HTML\BasicModule implements HTML\ModuleInterface
         if (is_int($until)) {
             $i = 0;
             while ($i < $until && HTML\Store::hasTags()) {
-                HTML\Store::get('last')->close();
+                HTML\Store::get()->close();
                 $i++;
             }
         } elseif ($until === 'all') {
             while (HTML\Store::hasTags()) {
-                HTML\Store::get('last')->close();
+                HTML\Store::get()->close();
             }
         } elseif (strpos($until, '.') === 0) {
             $found = false;
             while (!$found && HTML\Store::hasTags()) {
-                if (HTML\Store::get('last')->hasClass(substr($until, 1))) {
+                if (HTML\Store::get()->hasClass(substr($until, 1))) {
                     $found = true;
                 }
-                HTML\Store::get('last')->close();
+                HTML\Store::get()->close();
             }
         } elseif (strpos($until, '#') === 0) {
             $found = false;
             while (!$found && HTML\Store::hasTags()) {
-                if (isset(HTML\Store::get('last')->attributes['id'])
-                    && HTML\Store::get('last')->attributes['id'] == substr($until, 1)
+                if (isset(HTML\Store::get()->attributes['id'])
+                    && HTML\Store::get()->attributes['id'] == substr($until, 1)
                 ) {
                     $found = true;
                 }
-                HTML\Store::get('last')->close();
+                HTML\Store::get()->close();
             }
         } elseif(!empty($until)) {
             $found = false;
             while (!$found && HTML\Store::hasTags()) {
-                if (HTML\Store::get('last')->name === $until) {
+                if (HTML\Store::get()->name === $until) {
                     $found = true;
                 }
-                HTML\Store::get('last')->close();
+                HTML\Store::get()->close();
             }
         }
     }

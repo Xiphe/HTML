@@ -13,6 +13,7 @@
         }
     ],
     "require": {
+        "xiphe/base" : ">=1.0",
         "phpspec/php-diff": "dev-master",
         "dflydev/markdown": "~1.0",
         "php": ">=5.3"

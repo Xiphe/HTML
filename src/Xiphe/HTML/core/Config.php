@@ -69,22 +69,27 @@ class Config
     private static $_defaults = array();
 
     /**
-     * Turn ajax mode on or off
+     * Currently active modes.
      * 
      * @var boolean
      */
-    private static $_ajaxMode = false;
+    public static $modes = array();
 
     /**
-     * Overload configuration for ajax mode.
+     * Configurations for modes.
      * 
      * @var array
      */
-    private static $_ajaxSettings = array(
-        'tabs' => 0,
-        'tab' => "",
-        'break' => "",
-        'noComments' => true
+    public static $modeSettings = array(
+        'ajax' => array(
+            'tabs' => 0,
+            'tab' => "",
+            'break' => "",
+            'noComments' => true
+        ),
+        'noComments' => array(
+            'noComments' => true
+        )
     );
 
     /**
@@ -181,11 +186,40 @@ class Config
      */
     public static function ajax($activate = true)
     {
-        if ($activate) {
-            self::$_ajaxMode = true;
+        if ($activate && !in_array('ajax', self::$modes)) {
+            self::setMode('ajax');
         } else {
-            self::$_ajaxMode = false;
+            self::unsetMode('ajax');
         }
+    }
+
+    public static function setMode($name)
+    {
+        if (!in_array($name, self::$modes)) {
+            self::$modes[] = $name;
+        }
+    }
+
+    public static function unsetMode($name)
+    {
+        if (in_array($name, self::$modes)) {
+            unset(self::$modes[array_search($name, self::$modes)]);
+        }
+    }
+
+    public static function isActiveMode($name)
+    {
+        return in_array($name, self::$modes);
+    }
+
+    public static function killComments()
+    {
+        self::setMode('noComments');
+    }
+
+    public static function reanimateComments()
+    {
+        self::unsetMode('noComments');
     }
 
     /**
@@ -216,8 +250,10 @@ class Config
             return null;
         }
 
-        if (self::$_ajaxMode === true && isset(self::$_ajaxSettings[$key])) {
-            return self::$_ajaxSettings[$key];
+        foreach (self::$modes as $mode) {
+            if (isset(self::$modeSettings[$mode][$key])) {
+                return self::$modeSettings[$mode][$key];
+            }
         }
 
         if (!$preferGlobal && self::$_CurrentHTMLInstance && isset(self::$_CurrentHTMLInstance->$key)) {

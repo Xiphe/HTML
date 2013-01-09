@@ -263,7 +263,7 @@ class Cleaner
                 /*
                  * It is a closing tag
                  */
-                $add = Store::get('last');
+                $add = Store::get();
                 break;
             case 'comment':
             case 'content':
