@@ -156,7 +156,7 @@ class Store
             $found = false;
             $i = 0;
             while (self::hasTags() > $i*-1) {
-                if (self::get('last', $i)->hasClass(substr($tag, 1))) {
+                if (self::get('latest', $i)->hasClass(substr($tag, 1))) {
                     $found = true;
                     break;
                 }
@@ -167,8 +167,8 @@ class Store
             $found = false;
             $i = 0;
             while (self::hasTags() > $i*-1) {
-                if (isset(self::get('last', $i)->attributes['id'])
-                    && self::get('last', $i)->attributes['id'] == substr($tag, 1)
+                if (isset(self::get('latest', $i)->attributes['id'])
+                    && self::get('latest', $i)->attributes['id'] == substr($tag, 1)
                 ) {
                     $found = true;
                     break;
@@ -180,7 +180,7 @@ class Store
             $found = false;
             $i = 0;
             while (self::hasTags() > $i*-1) {
-                if (self::get('last', $i)->name === $tag) {
+                if (self::get('latest', $i)->name === $tag) {
                     $found = true;
                     break;
                 }

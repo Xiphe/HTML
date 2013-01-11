@@ -52,6 +52,15 @@ Then include `[path to]/bootstrap.php` or `[path to]/vendor/autoload.php`.
 Changelog
 ---------
 
+### 2.0.6
++ fixed bugs related to Store::get()
++ desktop/mobile classes on html tag if THETOOLS are available.
+
+### 2.0.5
++ callbacks for tags
++ configuration modes
++ bugfixes
+
 ### 2.0.4
 + fixed wp textdomain error 
 
