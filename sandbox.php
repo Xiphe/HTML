@@ -24,3 +24,14 @@ $HTML = new Xiphe\HTML(
 );
 
 /* GO PLAY! */
+$HTML->s_div('.test')
+	->div('Hallo')
+	->end('.test');
+
+
+// $HTML->HTML5()
+// 	->title('CacheTest')
+// ->end('head')->s_body('.eineKlasse')
+// ->h1('Miese Überschrift', '.headline')
+// ->p('Lorem Ipsum')
+// ->close('all');

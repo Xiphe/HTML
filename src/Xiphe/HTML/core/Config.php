@@ -69,6 +69,13 @@ class Config
     private static $_defaults = array();
 
     /**
+     * A unique hash representing the current configuration state will be stored here.
+     *
+     * @var boolean
+     */
+    private static $_hash = false;
+
+    /**
      * Currently active modes.
      * 
      * @var boolean
@@ -196,6 +203,7 @@ class Config
     public static function setMode($name)
     {
         if (!in_array($name, self::$modes)) {
+            self::$_hash = false;
             self::$modes[] = $name;
         }
     }
@@ -203,6 +211,7 @@ class Config
     public static function unsetMode($name)
     {
         if (in_array($name, self::$modes)) {
+            self::$_hash = false;
             unset(self::$modes[array_search($name, self::$modes)]);
         }
     }
@@ -268,6 +277,19 @@ class Config
         }
     }
 
+    public static function getAll()
+    {   
+        $r = array();
+        foreach (self::$_config as $key => $value) {
+            if (self::$_CurrentHTMLInstance && isset(self::$_CurrentHTMLInstance->$key)) {
+                $r['instance'][$key] = self::$_CurrentHTMLInstance->$key;
+            } 
+            $r['global'][$key] = $value;
+        }
+
+        return $r;
+    }
+
     /**
      * Changes a global configuration.
      * 
@@ -282,6 +304,8 @@ class Config
         if (!isset(self::$_config[$key])) {
             return false;
         }
+
+        self::$_hash = false;
 
         if (!$preferGlobal && self::$_CurrentHTMLInstance && isset(self::$_CurrentHTMLInstance->$key)) {
             self::s3t(self::$_CurrentHTMLInstance->$key, $value);
@@ -321,6 +345,22 @@ class Config
         $target = $value;
     }
 
+    public static function getHash()
+    {
+        if (self::$_hash === false) {
+            self::createHash();
+        }
+
+        return self::$_hash;
+    }
+
+    public static function createHash()
+    {
+        self::$_hash = md5(serialize(self::getAll()));
+    }
+
+
+
     /**
      * Sets a instance of \Xiphe\HTML to the static class variable.
      * Thereby indicating that this instance does the last call.
@@ -331,7 +371,10 @@ class Config
      */
     public static function setHTMLInstance(\Xiphe\HTML &$HTML)
     {
-        self::$_CurrentHTMLInstance = $HTML;
+        if (self::$_CurrentHTMLInstance !== $HTML) {
+            self::$_CurrentHTMLInstance = $HTML;
+            self::$_hash = false;
+        }
     }
 
     /**
@@ -353,6 +396,7 @@ class Config
      */
     public static function unsetHTMLInstance()
     {
+        self::$_hash = false;
         self::$_CurrentHTMLInstance = null;
     }
 
@@ -450,6 +494,12 @@ EOD;
                     'default' => './',
                     'description' => __('Used to replace ./ in src & href if MagicURI is enabled.', 'html')
                 ),
+                'useCache' => array(
+                    'label' => __('Use Cache', 'html'),
+                    'type' => 'checkbox',
+                    'default' => true,
+                    'description' => __('Every tag generation will be cached to improve performance if activated.', 'html')
+                ),
                 'noComments' => array(
                     'label' => __('Disable comments', 'html'),
                     'type' => 'checkbox',
@@ -491,6 +541,12 @@ EOD;
                     'type' => 'input',
                     'default' => 'html',
                     'description' => __('Default textdomain. Used to identify the script that initiates the translation.', 'html')
+                ),
+                'cacheDir' => array(
+                    'label' => __('Cache directory', 'html'),
+                    'type' => 'input',
+                    'default' => 'cache/',
+                    'description' => __('Directory where the cache object will be stored.', 'html')
                 ),
                 'tabs' => array(
                     'label' => __('Starting tabcount', 'html'),

@@ -57,6 +57,10 @@ class Generator
      */
     private static function _applyPreGenerationFilters(&$Obj)
     {
+        if (Config::get('useCache')) {
+            ob_start();
+        }
+
         if ($Obj->name == 'comment' && Config::get('noComments')) {
             $Obj->destroy();
 
@@ -79,15 +83,22 @@ class Generator
      * 
      * @return mixed  null or string if the tag is in getObject mode.
      */
-    private static function _applyPostGenerationFilters(&$Obj)
+    private static function _applyPostGenerationFilters(&$Obj, $cacheHash)
     {
+        $r = null;
         if (in_array('return', $Obj->options)) {
-            return ob_get_clean();
+            $r = ob_get_clean();
+        } elseif (in_array('getObject', $Obj->options)) {
+            $r = $Obj;
         }
 
-        if (in_array('getObject', $Obj->options)) {
-            return $Obj;
+        if (Config::get('useCache')) {
+            $content = ob_get_clean();
+            Cache::set($cacheHash, (object) array('o' => $content, 'r' => $r));
+            echo $content;
         }
+
+        return $r;
     }
 
     /**
@@ -172,6 +183,22 @@ class Generator
          */
         if (Config::get('disable')) {
             return;
+        }
+
+        $cacheHash = false;
+        if (Config::get('useCache')) {
+            $cacheHash = md5(
+                sprintf(
+                    '%s|%s',
+                    serialize(func_get_args()),
+                    Config::getHash()
+                )
+            );
+
+            if (false !== $cache = Cache::get($cacheHash)) {
+                echo $cache->o;
+                return $cache->r;
+            }
         }
 
         /*
@@ -276,7 +303,7 @@ class Generator
              * Do things that should be done after tag generation.
              */
 
-            return self::_applyPostGenerationFilters($Tag);
+            return self::_applyPostGenerationFilters($Tag, $cacheHash);
         } else {
             if (empty($Module)) {
                 $Module = Modules::get($tag, $args, $options, $called);
@@ -300,7 +327,7 @@ class Generator
              * Do things that should be done after tag generation.
              */
 
-            return self::_applyPostGenerationFilters($Module);
+            return self::_applyPostGenerationFilters($Module, $cacheHash);
         }
     }
 
