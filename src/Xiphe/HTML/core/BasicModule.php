@@ -108,7 +108,7 @@ class BasicModule
      * @return void
      */
     final public function generate() {
-        $options = array_merge($this->options, (array) 'generate');
+        $options = array_merge($this->options, array('generate', 'noCache'));
         Generator::call($this->called, $this->args, $options);
     }
 }

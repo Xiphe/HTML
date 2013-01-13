@@ -13,7 +13,8 @@ $DemoHTML = new Xiphe\HTML(array(
     'baseUrl' => 'http://www.example.org',
     'maxLineWidth' => 100,
     'tabWorth' => 8,
-    'store' => 'internal'
+    'store' => 'internal',
+    'useCache' => false
 ));
 
 $sectionOrder = array(

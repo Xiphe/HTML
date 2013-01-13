@@ -23,6 +23,8 @@ use Xiphe\HTML\core as HTML;
  */
 class Close extends HTML\BasicModule implements HTML\ModuleInterface
 {
+    public $noCache = true;
+
     /**
      * Module Logic
      *
@@ -30,19 +32,22 @@ class Close extends HTML\BasicModule implements HTML\ModuleInterface
      */
     public function execute()
     {   
+        $this->closed = 0;
+        $before = HTML\Store::count();
+
         if (isset($this->args[1]) && $this->args[1] && !HTML\Store::has($this->args[0])) {
             return;
         }
         
+        if (isset($this->args[0])) {
+            $until = $this->args[0];
+        }
+
         if (empty($this->args) || $this->args[0] == '')  {
             if (HTML\Store::hasTags()) {
                 HTML\Store::get()->close();
             }
-
-            return;
-        }
-        $until = $this->args[0];
-        if (is_int($until)) {
+        } elseif (is_int($until)) {
             $i = 0;
             while ($i < $until && HTML\Store::hasTags()) {
                 HTML\Store::get()->close();
@@ -79,5 +84,7 @@ class Close extends HTML\BasicModule implements HTML\ModuleInterface
                 HTML\Store::get()->close();
             }
         }
+
+        $this->closed = $before - HTML\Store::count();
     }
 }

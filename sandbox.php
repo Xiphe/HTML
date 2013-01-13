@@ -9,6 +9,8 @@
  * @link     https://github.com/Xiphe/-HTML
  */
 
+use Xiphe\HTML\core as H;
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -19,14 +21,34 @@ $HTML = new Xiphe\HTML(
         'debug' => 'Exception',
         'baseUrl' => 'http://example.org',
         'cleanMode' => 'strong',
-        'tabs' => 0
+        'tabs' => 0,
+        'tab' => '',
+        'break' => '',
+        'noComments' => true
+        // ,'useCache' => false
     )
 );
 
 /* GO PLAY! */
-$HTML->s_div('.test')
-	->div('Hallo')
-	->end('.test');
+$s_mt = explode(" ",microtime());
+// $HTML->HTML5()
+// ->end('head');
+$HTML->s_body('.eineKlasse')->end()->s_div('test');
+// ->p('Lore Ipsum')
+// ->close('all');
+;
+$e_mt = explode(" ",microtime());
+echo '<br /><br />Runtime: '.(($e_mt[1] + $e_mt[0]) - ($s_mt[1] + $s_mt[0]))*1000;
+
+
+// $s_mt = explode(" ",microtime());
+// $HTML->s_p('.test')->p('Hallo Welt');
+// // var_dump(Xiphe\HTML\core\Store::get('latest'));
+// $HTML->end();
+// $e_mt = explode(" ",microtime());
+// echo '<br /><br />Runtime: '.(($e_mt[1] + $e_mt[0]) - ($s_mt[1] + $s_mt[0]))*1000;
+	// ->div('Hallo')
+	// ->end('.test)
 
 
 // $HTML->HTML5()

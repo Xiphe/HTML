@@ -67,8 +67,9 @@ class Cache
 	public static function get($hash)
 	{
 		if (false !== self::_getDir()) {
-			$key = substr($hash, 0, 2);
-			$hash = substr($hash, 2);
+			$key = substr($hash, 0, 3);
+			$hash = substr($hash, 3);
+			// $key = 'cache';
 
 			self::load($key);
 
@@ -85,7 +86,7 @@ class Cache
 		if (false !== $cd = self::_getDir()) {
 			if (!isset(self::$_cache[$key]) && file_exists($cd.$key)) {
 				self::$_cache[$key] = unserialize(file_get_contents($cd.$key));
-			} else {
+			} elseif(!isset(self::$_cache[$key])) {
 				self::$_cache[$key] = false;
 			}
 		}	
@@ -95,8 +96,15 @@ class Cache
 	public static function set($hash, $content)
 	{	
 		if (false !== self::_getDir()) {
-			$key = substr($hash, 0, 2);
-			$hash = substr($hash, 2);
+			$key = substr($hash, 0, 3);
+			$hash = substr($hash, 3);
+			// $key = 'cache';
+
+			if (empty(self::$_cache[$key])) {
+				self::$_cache[$key] = array();
+			} else {
+				$inspect = true;
+			}
 
 			self::$_cache[$key][$hash] = array(
 				'c' => $content,

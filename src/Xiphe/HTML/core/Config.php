@@ -171,6 +171,12 @@ class Config
         }
     }
 
+    public static function changed()
+    {
+        Store::unsetHash();
+        self::$_hash = false;
+    }
+
     /**
      * Returns the default configuration.
      * 
@@ -203,16 +209,16 @@ class Config
     public static function setMode($name)
     {
         if (!in_array($name, self::$modes)) {
-            self::$_hash = false;
             self::$modes[] = $name;
+            self::changed();
         }
     }
 
     public static function unsetMode($name)
     {
         if (in_array($name, self::$modes)) {
-            self::$_hash = false;
             unset(self::$modes[array_search($name, self::$modes)]);
+            self::changed();
         }
     }
 
@@ -305,8 +311,6 @@ class Config
             return false;
         }
 
-        self::$_hash = false;
-
         if (!$preferGlobal && self::$_CurrentHTMLInstance && isset(self::$_CurrentHTMLInstance->$key)) {
             self::s3t(self::$_CurrentHTMLInstance->$key, $value);
         } else {
@@ -320,6 +324,8 @@ class Config
                 self::s3t(self::$_config[$key], $value);
             }
         }
+
+        self::changed();
 
         return true;
     }
@@ -373,7 +379,7 @@ class Config
     {
         if (self::$_CurrentHTMLInstance !== $HTML) {
             self::$_CurrentHTMLInstance = $HTML;
-            self::$_hash = false;
+            self::changed();
         }
     }
 
@@ -396,8 +402,8 @@ class Config
      */
     public static function unsetHTMLInstance()
     {
-        self::$_hash = false;
         self::$_CurrentHTMLInstance = null;
+        self::changed();
     }
 
     private static function _createSampleConfig()

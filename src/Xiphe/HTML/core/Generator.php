@@ -29,6 +29,7 @@ class Generator
      * @var array
      */
     public static $tagOptionKeys = array(
+        'a' => 'noCache',
         'b' => 'bbContent', //deprecated
         'c' => 'cleanContent',
         'd' => 'doNotSelfQlose',
@@ -45,7 +46,7 @@ class Generator
         's' => 'start',
         't' => 'justGetObject',
         'v' => 'dontValidateAttrs',
-        'x' => 'translate'
+        'x' => 'translate',
     );
 
     /**
@@ -55,9 +56,9 @@ class Generator
      * 
      * @return mixed the object if it is in justGetObject mode or null.
      */
-    private static function _applyPreGenerationFilters(&$Obj)
+    private static function _applyPreGenerationFilters(&$Obj, $cacheHash)
     {
-        if (Config::get('useCache')) {
+        if (!empty($cacheHash) && Config::get('useCache')) {
             ob_start();
         }
 
@@ -92,9 +93,23 @@ class Generator
             $r = $Obj;
         }
 
-        if (Config::get('useCache')) {
+        if (!empty($cacheHash) && Config::get('useCache')) {
             $content = ob_get_clean();
-            Cache::set($cacheHash, (object) array('o' => $content, 'r' => $r));
+
+            if (empty($Obj->noCache)) {
+                $cache = array(
+                    'c' => $content,
+                    'r' => $r
+                );
+
+                // TODO: Save Tags closed by close Module and reclose them when loaded from cache.
+
+                if ($Obj->hasOption('start') && !empty($content)) {
+                    $cache['o'] = clone $Obj;
+                }
+                Cache::set($cacheHash, (object) $cache);
+            }
+
             echo $content;
         }
 
@@ -186,20 +201,26 @@ class Generator
         }
 
         $cacheHash = false;
-        if (Config::get('useCache')) {
-            $cacheHash = md5(
-                sprintf(
-                    '%s|%s',
-                    serialize(func_get_args()),
-                    Config::getHash()
-                )
+        if (Config::get('useCache') && !in_array('noCache', $addedOptions)) {
+            $hashBase = sprintf(
+                '%s|%s|%s',
+                serialize(func_get_args()),
+                Store::getHash(),
+                Config::getHash()
             );
+            $cacheHash = md5($hashBase);
 
             if (false !== $cache = Cache::get($cacheHash)) {
-                echo $cache->o;
+                echo $cache->c;
+                if (isset($cache->o)) {
+                    $Obj = clone $cache->o;
+                    $Obj->reInitFromCache();
+                }
                 return $cache->r;
             }
         }
+
+        // var_dump($hashBase);
 
         /*
          * Sanitize Method name. (Just to be sure XD)
@@ -284,7 +305,7 @@ class Generator
             /*
              * Do things that should be done before tag will be created
              */
-            $r = self::_applyPreGenerationFilters($Tag);
+            $r = self::_applyPreGenerationFilters($Tag, $cacheHash);
 
             /*
              * Check if the pre-generation filters have returned anything and return it in this case.
@@ -312,7 +333,7 @@ class Generator
             /*
              * Do things that should be done before tag will be created
              */
-            $r = self::_applyPreGenerationFilters($Module);
+            $r = self::_applyPreGenerationFilters($Module, $cacheHash);
 
             /*
              * Check if the pre-generation filters have returned anything and return it in this case.
@@ -722,9 +743,9 @@ class Generator
              * Use glue (no tabs and line breaks between label, seperator and tag)
              */
             if ($labelArgs['pos'] == 'after') {
-                self::call('blank', array(trim($Tag).$labelArgs['sep'].trim($Label)));
+                self::call('blank', array(trim($Tag).$labelArgs['sep'].trim($Label)), array('noCache'));
             } else {
-                self::call('blank', array(trim($Label).$labelArgs['sep'].trim($Tag)));
+                self::call('blank', array(trim($Label).$labelArgs['sep'].trim($Tag)), array('noCache'));
             }
         } else {
             /*
@@ -733,13 +754,13 @@ class Generator
             if ($labelArgs['pos'] == 'after') {
                 echo $Tag;
                 if (!empty($labelArgs['sep'])) {
-                    self::call('blank', array($labelArgs['sep']));
+                    self::call('blank', array($labelArgs['sep']), array('noCache'));
                 }
                 echo $Label;
             } else {
                 echo $Label;
                 if (!empty($labelArgs['sep'])) {
-                    self::call('blank', array($labelArgs['sep']));
+                    self::call('blank', array($labelArgs['sep']), array('noCache'));
                 }
                 echo $Tag;
             }

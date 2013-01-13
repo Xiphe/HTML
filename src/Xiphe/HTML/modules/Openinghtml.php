@@ -77,8 +77,8 @@ class Openinghtml extends Core\BasicModule implements Core\ModuleInterface
         Core\Generator::lineBreak();
         echo $this->getHtml();
         echo $this->getHead();
-        \Xiphe\HTML::get()->utf8()
-            ->meta('http-equiv=X-UA-Compatible|content=IE\=edge,chrome\=1');
+        Core\Generator::call('utf8', null, array('noCache'));
+        Core\Generator::call('meta', 'http-equiv=X-UA-Compatible|content=IE\=edge,chrome\=1', array('noCache'));
     }
 
     /**

@@ -283,6 +283,15 @@ class Tag extends \Xiphe\Base
         }
     }
 
+    public function reInitFromCache()
+    {
+        // $this->ID = Store::getNewID();
+        if ($this->_opened) {
+            Store::add($this);
+            Config::set('tabs', '++');
+        }
+    }
+
     /**
      * Updates class variables.
      *
@@ -526,7 +535,7 @@ class Tag extends \Xiphe\Base
         } else {
             return false;
         }
-        Generator::call('il_comment', array($hint));
+        Generator::call('il_comment', array($hint), array('noCache'));
     }
 
     /**

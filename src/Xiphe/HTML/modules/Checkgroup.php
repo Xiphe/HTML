@@ -48,7 +48,8 @@ class Checkgroup extends HTML\BasicModule implements HTML\ModuleInterface
                     $name,
                     $label,
                     $ckd
-                )
+                ),
+                array('noCache')
             );
 
             $i++;

@@ -37,6 +37,13 @@ class Store
     private static $_cID = 1;
 
     /**
+     * A unique hash representing the current store state will be stored here.
+     *
+     * @var boolean
+     */
+    private static $_hash = false;
+
+    /**
      * Gets a new unique Tag id.
      *
      * @return integer
@@ -68,6 +75,8 @@ class Store
      */
     public static function add(Tag &$Tag)
     {
+        self::$_hash = false;
+
         if (Config::get('store') == 'global') {
             self::$_tagStore[$Tag->ID] = &$Tag;
         } elseif (Config::get('store') == 'internal') {
@@ -106,9 +115,47 @@ class Store
             ) {
                 return Config::getHTMLInstance()->tagStore[$ID];
             }
+        } elseif ($ID === 'all') {
+            if (Config::get('store') == 'global') {
+                return self::$_tagStore;
+            } else {
+                return Config::getHTMLInstance()->tagStore;
+            }
         }
 
         return false;
+    }
+
+    public static function getHash()
+    {
+        if (false === self::$_hash) {
+            self::createHash();
+        }
+
+        return self::$_hash;
+    }
+
+    public static function createHash()
+    {   
+        self::$_hash = md5(sprintf(
+            '%s|%s',
+            serialize(self::get('all')),
+            Config::get('store')
+        ));
+    }
+
+    public static function unsetHash()
+    {
+        self::$_hash = false;
+    }
+
+    public static function count()
+    {
+        if (Config::get('store') == 'global') {
+            return count(self::$_tagStore);
+        } else {
+            return count(Config::getHTMLInstance()->tagStore);
+        }
     }
 
     /**
@@ -120,6 +167,8 @@ class Store
      */
     public static function remove(Tag &$Tag)
     {
+        self::$_hash = false;
+
         if (Config::get('store') == 'global' && isset(self::$_tagStore[$Tag->ID])) {
             unset(self::$_tagStore[$Tag->ID]);
         } elseif (Config::get('store') == 'internal'
