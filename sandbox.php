@@ -21,22 +21,24 @@ $HTML = new Xiphe\HTML(
         'debug' => 'Exception',
         'baseUrl' => 'http://example.org',
         'cleanMode' => 'strong',
-        'tabs' => 0,
-        'tab' => '',
-        'break' => '',
-        'noComments' => true
+        'tabs' => 0
+        // 'tab' => '',
+        // 'break' => '',
+        // 'noComments' => true
         // ,'useCache' => false
     )
 );
 
 /* GO PLAY! */
 $s_mt = explode(" ",microtime());
-// $HTML->HTML5()
-// ->end('head');
-$HTML->s_body('.eineKlasse')->end()->s_div('test');
-// ->p('Lore Ipsum')
-// ->close('all');
-;
+$HTML->HTML5()
+// $HTML->s_head()
+->title('Ein Titel')
+->end('head');
+$HTML->s_body('.eineKlasse')
+    ->s_div('test')
+->p('Lore Ipsum')
+->close('all');
 $e_mt = explode(" ",microtime());
 echo '<br /><br />Runtime: '.(($e_mt[1] + $e_mt[0]) - ($s_mt[1] + $s_mt[0]))*1000;
 

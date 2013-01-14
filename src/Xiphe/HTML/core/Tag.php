@@ -197,7 +197,7 @@ class Tag extends \Xiphe\Base
         /*
          * Get default brackets
          */
-        $this->brackets = &TagInfo::$defaultBrackets;
+        $this->brackets = TagInfo::$defaultBrackets;
 
         /*
          * Check if name is an alias and set realName or custom brackets.
@@ -285,7 +285,9 @@ class Tag extends \Xiphe\Base
 
     public function reInitFromCache()
     {
-        // $this->ID = Store::getNewID();
+        if (Store::hasID($this->ID)) {
+            $this->ID = Store::getNewID();
+        }
         if ($this->_opened) {
             Store::add($this);
             Config::set('tabs', '++');

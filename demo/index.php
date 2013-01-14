@@ -58,4 +58,5 @@ $HTML->s_p();
     $HTML->span(' | Test runtime sum: %fs', null, $runtime/1000);
     $e_mt = explode(" ", microtime());
     $HTML->span(' | Complete runtime: %fs', null, (($e_mt[1] + $e_mt[0]) - ($s_mt[1] + $s_mt[0])));
+    $HTML->span(' | Memory Peak: %sMB', null, memory_get_peak_usage(true)/1048576);
 $HTML->end('all');

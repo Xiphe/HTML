@@ -23,6 +23,7 @@ use Xiphe\HTML\core as Core;
  */
 class Openinghtml extends Core\BasicModule implements Core\ModuleInterface
 {
+    public $noCache = true;
 
     /**
      * Module Logic
@@ -78,7 +79,7 @@ class Openinghtml extends Core\BasicModule implements Core\ModuleInterface
         echo $this->getHtml();
         echo $this->getHead();
         Core\Generator::call('utf8', null, array('noCache'));
-        Core\Generator::call('meta', 'http-equiv=X-UA-Compatible|content=IE\=edge,chrome\=1', array('noCache'));
+        Core\Generator::call('meta', array('http-equiv=X-UA-Compatible|content=IE\=edge,chrome\=1'), array('noCache'));
     }
 
     /**

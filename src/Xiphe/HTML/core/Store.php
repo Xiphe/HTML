@@ -178,6 +178,17 @@ class Store
         }
     }
 
+    public static function removeN($count = 1)
+    {
+        self::$_hash = false;
+
+        while($count > 0 && self::hasTags()) {
+            $Tag = self::get('latest');
+            self::remove($Tag);
+            $count--;
+        }
+    }
+
     /**
      * Checks if some Tags are stored.
      *
@@ -238,5 +249,13 @@ class Store
             return $found;
         }
         return false;
+    }
+
+    public static function hasID($ID) {
+        if (Config::get('store') == 'global') {
+            return isset(self::$_tagStore[$ID]);
+        } elseif (Config::get('store') == 'internal') {
+            return isset(Config::getHTMLInstance()->tagStore[$ID]);
+        }
     }
 }

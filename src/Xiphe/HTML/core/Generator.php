@@ -102,7 +102,9 @@ class Generator
                     'r' => $r
                 );
 
-                // TODO: Save Tags closed by close Module and reclose them when loaded from cache.
+                if (get_class($Obj) === 'Xiphe\HTML\modules\Close') {
+                    $cache['closes'] = $Obj->closed;
+                }
 
                 if ($Obj->hasOption('start') && !empty($content)) {
                     $cache['o'] = clone $Obj;
@@ -216,11 +218,17 @@ class Generator
                     $Obj = clone $cache->o;
                     $Obj->reInitFromCache();
                 }
+                if (isset($cache->closes)) {
+                    Store::removeN($cache->closes);
+                    \Xiphe\HTML::get()->addTabs(-$cache->closes);
+                }
                 return $cache->r;
             }
         }
 
-        // var_dump($hashBase);
+        // if ($method === 'close') {
+        //     var_dump(Store::getAll());
+        // }
 
         /*
          * Sanitize Method name. (Just to be sure XD)

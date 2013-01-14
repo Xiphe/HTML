@@ -23,7 +23,7 @@ use Xiphe\HTML\core as HTML;
  */
 class Close extends HTML\BasicModule implements HTML\ModuleInterface
 {
-    public $noCache = true;
+    // public $noCache = true;
 
     /**
      * Module Logic

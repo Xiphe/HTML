@@ -67,9 +67,8 @@ class Cache
 	public static function get($hash)
 	{
 		if (false !== self::_getDir()) {
-			$key = substr($hash, 0, 3);
-			$hash = substr($hash, 3);
-			// $key = 'cache';
+			$key = substr($hash, 0, 2);
+			$hash = substr($hash, 2);
 
 			self::load($key);
 
@@ -96,9 +95,8 @@ class Cache
 	public static function set($hash, $content)
 	{	
 		if (false !== self::_getDir()) {
-			$key = substr($hash, 0, 3);
-			$hash = substr($hash, 3);
-			// $key = 'cache';
+			$key = substr($hash, 0, 2);
+			$hash = substr($hash, 2);
 
 			if (empty(self::$_cache[$key])) {
 				self::$_cache[$key] = array();
