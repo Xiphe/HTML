@@ -262,7 +262,11 @@ class Config
             if (class_exists('Xiphe\THEMASTER\core\THE')
                 && class_exists(TM\THE::WPSETTINGS)
             ) {
-                return TM\THEWPSETTINGS::get_setting($key, XIPHE_HTML_TEXTID);
+                try {
+                    return TM\THEWPSETTINGS::get_setting($key, XIPHE_HTML_TEXTID);
+                } catch(\Exception $c) {
+                    return self::$_config[$key];
+                }
             }
             return self::$_config[$key];
         }
