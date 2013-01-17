@@ -24,8 +24,27 @@ This project is inspired by the [CakePHP HtmlHelper](http://api.cakephp.org/clas
 3rd Party
 ---------
 
-* **[PHP Diff](https://packagist.org/packages/phpspec/php-diff)** by Chris Boulton (Used for the Demos/Tests. Will not be loaded in productive usage).
-* **[Markdown](https://packagist.org/packages/dflydev/markdown)** by Dragonfly Development Inc, Beau Simensen, Michel Fortin and John Gruber
+* Js/Css Minifiying from **[Fat-Free Framework](https://github.com/bcosca/fatfree)**  
+	Distributed under the GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007  
+	Copyright (c) 2009-2012 F3::Factory/Bong Cosca
+* **[PHP Diff](https://packagist.org/packages/phpspec/php-diff)** by Chris Boulton (Used for the Demos/Tests. Will not be loaded in productive usage).  
+	BSD License  
+	Copyright (c) 2009 Chris Boulton <chris.boulton@interspire.com>  
+	All rights reserved.
+* **[Markdown](https://packagist.org/packages/dflydev/markdown)**  
+	PHP Markdown & Extra  
+	Copyright (c) 2011, Dragonfly Development Inc  
+	All rights reserved.  
+
+	Based on PHP Markdown & Extra  
+	Copyright (c) 2004-2009 Michel Fortin  
+	<http://michelf.com/>  
+	All rights reserved.  
+
+	Based on Markdown  
+	Copyright (c) 2003-2006 John Gruber  
+	<http://daringfireball.net/>  
+	All rights reserved.  
 * **[phpDocumentor](http://www.phpdoc.org/)** was used to generate the documentation under /doc
 
 
@@ -41,7 +60,7 @@ Installation
 
 ### Standalone
 
-Use composer and require `"xiphe/html": "2.0.*"`
+Use [composer](http://getcomposer.org/) and require `"xiphe/html": "2.0.*"`
 
 or download the [latest "alldeps" branch](https://github.com/Xiphe/HTML/archive/alldeps.zip),
 extract it and put it anywhere in your php project.
@@ -51,6 +70,11 @@ Then include `[path to]/bootstrap.php` or `[path to]/vendor/autoload.php`.
 
 Changelog
 ---------
+
+### 2.0.7
++ [New Logic](https://github.com/bcosca/fatfree/blob/918eb1048742cf8780c6e3d61f3d1ea066d9fb73/lib/web.php#L464) for Content::compress()
++ Googleanalytics Module allowes $HTML->googleanalytics('UA-0000000-0') for a simple, compressed ga tracker code
++ Added basic Sublime Text 2 snippet
 
 ### 2.0.6
 + fixed bugs related to Store::get()
