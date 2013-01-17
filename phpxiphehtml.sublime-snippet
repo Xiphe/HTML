@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+\$HTML->${1:div}(${2}${3});${4}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>HTML</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.php</scope>
+	<description>Xiphe\HTML Tag</description>
+</snippet>

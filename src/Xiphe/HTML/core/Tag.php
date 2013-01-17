@@ -488,7 +488,6 @@ class Tag extends \Xiphe\Base
         }
         echo str_replace(':name', $this->realName, $this->brackets['end']);
     }
-
     /**
      * Closes the End Tag (Normally: >)
      *

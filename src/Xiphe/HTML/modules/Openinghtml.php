@@ -159,7 +159,13 @@ class Openinghtml extends Core\BasicModule implements Core\ModuleInterface
                 $engine .=' ';
             }
 
-            return "$before$engine$browser $browser-$version";
+            if (\Xiphe\THETOOLS::is_browser('mobile')) {
+                $mobile = 'mobile no-desktop';
+            } else {
+                $mobile = 'desktop no-mobile';
+            }
+
+            return "$before$engine$browser $browser-$version $mobile";
         }
 
         return '';
