@@ -128,6 +128,9 @@ Or check out the [Test/Examples Hybrid on html.xiphe.net](http://html.xiphe.net/
 Changelog
 ---------
 
+### 2.0.8
++ Select Module updated
+
 ### 2.0.7
 + [New Logic](https://github.com/bcosca/fatfree/blob/918eb1048742cf8780c6e3d61f3d1ea066d9fb73/lib/web.php#L464) for Content::compress()
 + Googleanalytics Module allowes $HTML->googleanalytics('UA-0000000-0') for a simple, compressed ga tracker code

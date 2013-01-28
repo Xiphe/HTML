@@ -30,50 +30,83 @@ class Select extends HTML\BasicModule implements HTML\ModuleInterface
      */
     public function execute()
     {
-        // var_dump($this->args);
 
+        /*
+         * Generate the Basic Tag.
+         */
         $Select = new HTML\Tag('select', array($this->args[0]), array('generate', 'start'));
+
+        /*
+         * Set the multiple attribute if multiple selections are active
+         */
         if (isset($this->args[2]) && is_array($this->args[2]) && !isset($Select->attributes['multiple'])) {
             $Select->attributes['multiple'] = '';
             $Select->update('attributes');
         }
 
-        $r = '';
-        $r .= $Select;
+        /*
+         * Open the Select Tag.
+         */
+        $r = ''.$Select;
 
-        $i = 1;
-        if (!isset($this->args[1])) {
-            $this->args[1] = array();
-        }
-        foreach ($this->args[1] as $k => $v) {
-            if (is_string($v)) {
-                $args = array();
-                if (!is_int($k)) {
-                    $args['value'] = $k;
-                }
-
-                if (isset($this->args[2]) && $this->isSelected($this->args[2], (!is_int($k) ? $k : $v), $i)) {
-                    $args['selected'] = '';
-                }
-
-                $r .= new HTML\Tag('option', array($v, $args));
-            } elseif (is_object($v) && get_class($v) == 'Xiphe\HTML\core\Tag') {
-                if (isset($this->args[2])) {
-                    if (isset($v->attributes['value'])) {
-                        $k = $v->attributes['value'];
-                    } else {
-                        $k = $v->content;
+        if (is_array($this->args[1])) {
+            $i = 1;
+            foreach ($this->args[1] as $k => $v) {
+                if (is_string($v)) {
+                    $args = array();
+                    if (!is_int($k)) {
+                        $args['value'] = $k;
                     }
 
-                    if ($this->isSelected($this->args[2], $k, $i)) {
-                        $v->attributes['selected'] = '';
-                        $v->update('attributes');
+                    if (isset($this->args[2]) && $this->isSelected($this->args[2], (!is_int($k) ? $k : $v), $i)) {
+                        $args['selected'] = '';
                     }
-                }
 
-                $r .= $v;
+                    $r .= new HTML\Tag('option', array($v, $args));
+                } elseif (is_array($v)) {
+                    $opts = array('', array());
+                    if (isset($v['inner'])) {
+                        $opts[0] = $v['inner'];
+                        unset($v['inner']);
+                    }
+                    if (isset($v['attrs'])) {
+                        $opts[1] = HTML\Generator::parseAtts($v['attrs']);
+                        unset($v['attrs']);
+                    }
+                    $opts = array_merge($opts, $v);
+
+
+                    if (!in_array('selected', $opts[1]) && 
+                        ($this->isSelected($this->args[2], $opts[0], $i) ||
+                            $this->isSelected($this->args[2], $k, $i)
+                        )
+                    ) {
+                        $opts[1]['selected'] = '';
+                    }
+
+                    if (!in_array('value', $opts[1])) {
+                        $opts[1]['value'] = $k;
+                    }
+
+                    $r .= new HTML\Tag('option', $opts);
+                } elseif (is_object($v) && get_class($v) == 'Xiphe\HTML\core\Tag') {
+                    if (isset($this->args[2])) {
+                        if (isset($v->attributes['value'])) {
+                            $k = $v->attributes['value'];
+                        } else {
+                            $k = $v->content;
+                        }
+
+                        if ($this->isSelected($this->args[2], $k, $i)) {
+                            $v->attributes['selected'] = '';
+                            $v->update('attributes');
+                        }
+                    }
+
+                    $r .= $v;
+                }
+                $i++;
             }
-            $i++;
         }
 
         $r .= $Select;
