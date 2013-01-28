@@ -19,6 +19,82 @@ This project is inspired by the [CakePHP HtmlHelper](http://api.cakephp.org/clas
 [Documentation(phpDocumentor)](http://html.xiphe.net/doc/)
 
 
+Installation
+------------
+
+### Wordpress
+
+1. Download the [latest "alldeps" branch](https://github.com/Xiphe/HTML/archive/alldeps.zip)
+1. Extract the archive and upload the plugin into the `/wp-content/plugins/` directory of your wordpress project.
+2. Activate the plugin through the 'Plugins' menu in WordPress
+
+### Standalone
+
+Use [composer](http://getcomposer.org/) and require `"xiphe/html": "2.0.*"`
+
+or download the [latest "alldeps" branch](https://github.com/Xiphe/HTML/archive/alldeps.zip),
+extract it and put it anywhere in your php project.
+Then include `[path to]/bootstrap.php` or `[path to]/vendor/autoload.php`.
+
+
+Basic Usage
+-----------
+
+Follow the [Installation](https://github.com/Xiphe/HTML#installation) steps to initiate the global $HTML variable.
+
+```php
+<?php
+/* Get access to an instance of Xiphe\HTML */
+global $HTML
+
+/* Opens a std HTML5 header - leaves you inside the <head> */
+$HTML->HTML5()
+	/* print a <title> */
+	->title('HTML Example')
+/* close the <head> tag */
+->close('head')
+/* open a <body> tag (s_[tag] will just open a [tag] - no </tag> will be echoed) */
+->s_body()
+	/* open a <div> tag with the class attribute "wrap" */
+	->s_div('.wrap')
+		/* open an <article> tag with an id */
+		->s_article('#article1')
+			/* print a <h1> with multiple attributes */
+			->h1('Hello Stranger', array('style' => 'color: red;', 'rel' => 'title'))
+			/* <3 */
+			->p('Thank you for checking out Xiphe\HTML - that\'s very kind of you')
+			/* Another way to pass multiple attributes to a tag */
+			->img('src=http://upload.wikimedia.org/wikipedia/commons/c/ce/Example_image.png|alt=example')
+/* close all Tags that have been opened previously */
+->close('all');
+```
+
+Output:
+
+```html
+<!DOCTYPE HTML>
+<html class="no-js">
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+		<title>HTML Example</title>
+	</head>
+	<body>
+		<div class="wrap">
+			<article id="article1">
+				<h1 rel="title" style="color: red;">Hello Stranger</h1>
+				<p>Thank you for checking out Xiphe\HTML - that's very kind of you</p>
+				<img alt="example" src="http://upload.wikimedia.org/wikipedia/commons/c/ce/Example_image.png" />
+			</article><!-- #article1 -->
+		</div><!-- .wrap -->
+	</body>
+</html><!-- .no-js -->
+
+```
+
+Want to dig deeper?
+[poke](https://github.com/Xiphe/HTML/issues) me to write a better documentation.
+Or check out the [Test/Examples Hybrid on html.xiphe.net](http://html.xiphe.net/demo/).
 
 
 3rd Party
@@ -49,27 +125,11 @@ This project is inspired by the [CakePHP HtmlHelper](http://api.cakephp.org/clas
 
 
 
-Installation
-------------
-
-### Wordpress
-
-1. Download the [latest "alldeps" branch](https://github.com/Xiphe/HTML/archive/alldeps.zip)
-1. Extract the archive and upload the plugin into the `/wp-content/plugins/` directory of your wordpress project.
-2. Activate the plugin through the 'Plugins' menu in WordPress
-
-### Standalone
-
-Use [composer](http://getcomposer.org/) and require `"xiphe/html": "2.0.*"`
-
-or download the [latest "alldeps" branch](https://github.com/Xiphe/HTML/archive/alldeps.zip),
-extract it and put it anywhere in your php project.
-Then include `[path to]/bootstrap.php` or `[path to]/vendor/autoload.php`.
-
-
-
 Changelog
 ---------
+
+### 2.0.8
++ Select Module updated
 
 ### 2.0.7
 + [New Logic](https://github.com/bcosca/fatfree/blob/918eb1048742cf8780c6e3d61f3d1ea066d9fb73/lib/web.php#L464) for Content::compress()
