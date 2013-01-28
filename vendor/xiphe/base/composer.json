@@ -1,0 +1,21 @@
+{
+	"name": "xiphe/base",
+    "type": "library",
+    "keywords": ["callbacks", "configuration", "singleton"],
+    "description": "Basic logic for new projects. Provides singleton, configuration, callback and basic api methods.",
+    "homepage": "https://github.com/Xiphe/Base",
+    "license": "GNU GENERAL PUBLIC LICENSE",
+    "authors": [
+        {
+            "name": "Hannes 'Xiphe' Diercks",
+            "email": "info@xiphe.net",
+            "homepage": "http://xiphe.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-0": { "Xiphe\\Base": "src/" }
+    }
+}

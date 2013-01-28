@@ -1,0 +1,10 @@
+/vendor
+/sftp-config.json
+/composer.lock
+config.php
+*.class
+*.pyc
+*.pyo
+*.settings
+*.project
+*.DS_Store

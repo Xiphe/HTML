@@ -1,5 +1,5 @@
 {
-    "hash": "2f63e523b288926e8f0f96ec8645d9e2",
+    "hash": "08ab6bf647e73cb46d0d1c13d17964e7",
     "packages": [
         {
             "name": "dflydev/markdown",
@@ -89,6 +89,50 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays)."
+        },
+        {
+            "name": "xiphe/base",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Xiphe/Base",
+                "reference": "1.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Xiphe/Base/archive/1.0.1.zip",
+                "reference": "1.0.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "time": "2013-01-09 15:16:54",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Xiphe\\Base": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GNU GENERAL PUBLIC LICENSE"
+            ],
+            "authors": [
+                {
+                    "name": "Hannes 'Xiphe' Diercks",
+                    "email": "info@xiphe.net",
+                    "homepage": "http://xiphe.net"
+                }
+            ],
+            "description": "Basic logic for new projects. Provides singleton, configuration, callback and basic api methods.",
+            "homepage": "https://github.com/Xiphe/Base",
+            "keywords": [
+                "configuration",
+                "singleton",
+                "callbacks"
+            ]
         }
     ],
     "packages-dev": null,

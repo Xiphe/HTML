@@ -8,5 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'dflydev\\markdown' => $vendorDir . '/dflydev/markdown/src',
     'Xiphe\\HTML' => $baseDir . '/src',
+    'Xiphe\\Base' => $vendorDir . '/xiphe/base/src/',
     'Diff' => $vendorDir . '/phpspec/php-diff/lib/',
 );
