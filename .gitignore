@@ -1,6 +1,8 @@
+/vendor
 /config.php
 /config-sample.php
 /sftp-config.json
+/composer.lock
 *.class
 *.pyc
 *.pyo
