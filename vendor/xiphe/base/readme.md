@@ -9,6 +9,11 @@ Provides singleton, configuration, callback and basic api methods.
 Changelog
 ---------
 
+### 1.1.0
+* introduce protected $_defaultConfiguration array
+* configuration can be changed more easy by calling initConfig or i on a singleton
+* doCallback now has a third parameter to allow return of results (filter-mode) instead of $this
+
 
 Todo
 ----

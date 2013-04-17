@@ -14,6 +14,7 @@ namespace Xiphe;
  */
 class Base {
 
+    const DS = DIRECTORY_SEPARATOR;
 
     /* ------------------ *
      *  STATIC VARIABLES  *
@@ -55,6 +56,13 @@ class Base {
      * @var stdClass
      */
     protected $_configuration;
+
+    /**
+     * The presets
+     *
+     * @var stdClass|array
+     */
+    protected $_defaultConfiguration = array();
 
     /**
      * The arguments given through initiation
@@ -115,16 +123,34 @@ class Base {
     public static function i()
     {
         $class = get_called_class();
-        if (!empty(self::$_baseInstances[$class])) {
-            return self::$_baseInstances[$class];
-        }
-
         $initArgs = func_get_args();
         if (count($initArgs) === 1) {
             $initArgs = $initArgs[0];
         }
 
+        if (!empty(self::$_baseInstances[$class])) {
+            $inst = self::$_baseInstances[$class];
+            if (!empty($initArgs)) {
+                $inst->initConfig($initArgs);
+            }
+
+            return $inst;
+        }
+
         return new $class($initArgs);
+    }
+
+    /**
+     * Destroy a potential singleton instance of the called class.
+     * 
+     * @return null
+     */
+    public static function destroySingleton()
+    {
+        $class = get_called_class();
+        if (!empty(self::$_baseInstances[$class])) {
+            unset(self::$_baseInstances[$class]);
+        }
     }
 
     /**
@@ -135,6 +161,7 @@ class Base {
      */
     public function init()
     {
+        $this->initConfig($this->_initArgs);
         return null;
     }
 
@@ -142,6 +169,55 @@ class Base {
     /* --------------- *
      *  CONFIGURATION  *
      * --------------- */
+
+    /**
+     * Initiate class configuration
+     *
+     * @param mixed $config a filename or array/object of config values
+     *
+     * @return object
+     */
+    public function initConfig($config)
+    {  
+        if (is_string($config)) {
+            if (file_exists(($configFile = $config)) ||
+                file_exists(($configFile = dirname(dirname(__FILE__)).self::DS.$config))
+            ) {
+                $config = $this->loadConfig($configFile);
+            }
+        } elseif (!is_array($config) && !is_object($config)) {
+            throw new \Exception("Invalid configuration.", 1);
+        }
+
+        $this->mergeConfig($config);
+
+        $this->doCallback('configurationInitiated', array($this->_configuration, $this));
+
+        return $this;
+    }
+
+    /**
+     * Merge new data into the current defaults and configuration
+     *
+     * @param mixed $new new data for configuration
+     *
+     * @return object
+     */
+    public function mergeConfig($new = array())
+    {
+        $config = (object) array_merge(
+            (array) $this->_defaultConfiguration,
+            (array) $this->_configuration,
+            (array) $new
+        );
+
+        foreach ($config as $key => $value) {
+            $this->setConfig($key, $value);
+        }
+
+        return $this;
+    }
+
 
     /**
      * Loads the configuration from a json or php file
@@ -152,18 +228,22 @@ class Base {
      */
     public function loadConfig($file)
     {
+        $config;
+
         switch (pathinfo($file, PATHINFO_EXTENSION)) {
         case 'json':
-            $this->_configuration = json_decode(file_get_contents($this->_configuration));
+            $config = json_decode(file_get_contents($file));
             break;
         case 'php':
-            $this->_configuration = include $file;
+            $config = include $file;
             break;
+        default:
+            return $this;
         }
 
-        $this->doCallback('configurationLoaded', array($this->_configuration, $this));
+        $this->doCallback('configurationLoaded', array($config, $this));
         
-        return $this;
+        return $config;
     }
 
     /**
@@ -242,19 +322,23 @@ class Base {
      *
      * @return object
      */
-    public function doCallback($name, array $values = array())
+    public function doCallback($name, array $values = array(), $getResult = false)
     {
         $values = array_merge(
             $values,
             array($name, $this)
         );
 
+        if ($getResult) {
+            $result = $values[0];
+        }
+
         /*
          * Hook into Wordpress if wanted.
          */
         if ($this->getConfig('hookIntoWordpress') && class_exists('\WP')) {
-            call_user_func_array(
-                'do_action',
+            $result = call_user_func_array(
+                ($getResult ? 'apply_filters' : 'do_action'),
                 array_merge(
                     (array) sprintf('%s_%s', $this->_name, strtolower($name)),
                     $values
@@ -265,19 +349,20 @@ class Base {
         /*
          * Do own callbacks.
          */
-        if (empty($this->_callbacks[$name])) {
-            return $this;
-        }
-
-        foreach ($this->_callbacks[$name] as $prio => $callbacks) {
-            foreach ($callbacks as $callbackKey) {
-                if (!empty(self::$_baseRealCallbacks[$callbackKey])) {
-                    call_user_func_array(self::$_baseRealCallbacks[$callbackKey], $values);
+        if (!empty($this->_callbacks[$name])) {
+            foreach ($this->_callbacks[$name] as $prio => $callbacks) {
+                foreach ($callbacks as $callbackKey) {
+                    if (!empty(self::$_baseRealCallbacks[$callbackKey])) {
+                        if ($getResult) {
+                            $values[0] = $result;
+                        }
+                        $result = call_user_func_array(self::$_baseRealCallbacks[$callbackKey], $values);
+                    }
                 }
             }
         }
 
-        return $this;
+        return ($getResult ? $result : $this);
     }
 
     /**
@@ -431,4 +516,4 @@ class Base {
         unset(self::$_baseR[$key]);
         return $this;
     }
-} ?>
+}

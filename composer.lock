@@ -18,9 +18,7 @@
             "require": {
                 "php": ">=5.3"
             },
-            "time": "2012-01-15 19:36:37",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-0": {
                     "dflydev\\markdown": "src"
@@ -54,7 +52,8 @@
             "homepage": "http://github.com/dflydev/dflydev-markdown",
             "keywords": [
                 "markdown"
-            ]
+            ],
+            "time": "2012-01-15 19:36:37"
         },
         {
             "name": "phpspec/php-diff",
@@ -70,9 +69,7 @@
                 "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312",
                 "shasum": ""
             },
-            "time": "2012-11-08 08:55:45",
             "type": "library",
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Diff": "lib/"
@@ -88,28 +85,27 @@
                     "homepage": "http://github.com/chrisboulton"
                 }
             ],
-            "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays)."
+            "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
+            "time": "2012-11-08 08:55:45"
         },
         {
             "name": "xiphe/base",
-            "version": "1.0.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Xiphe/Base",
-                "reference": "1.0.1"
+                "url": "https://github.com/Xiphe/Base.git",
+                "reference": "v1.1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Xiphe/Base/archive/1.0.1.zip",
-                "reference": "1.0.1",
+                "url": "https://api.github.com/repos/Xiphe/Base/zipball/v1.1.2",
+                "reference": "v1.1.2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3"
             },
-            "time": "2013-01-09 15:16:54",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-0": {
                     "Xiphe\\Base": "src/"
@@ -121,7 +117,7 @@
             ],
             "authors": [
                 {
-                    "name": "Hannes 'Xiphe' Diercks",
+                    "name": "Hannes Diercks",
                     "email": "info@xiphe.net",
                     "homepage": "http://xiphe.net"
                 }
@@ -129,18 +125,27 @@
             "description": "Basic logic for new projects. Provides singleton, configuration, callback and basic api methods.",
             "homepage": "https://github.com/Xiphe/Base",
             "keywords": [
+                "callbacks",
                 "configuration",
-                "singleton",
-                "callbacks"
-            ]
+                "singleton"
+            ],
+            "time": "2013-04-03 15:23:51"
         }
     ],
-    "packages-dev": null,
+    "packages-dev": [
+
+    ],
     "aliases": [
 
     ],
     "minimum-stability": "stable",
     "stability-flags": {
         "phpspec/php-diff": 20
-    }
+    },
+    "platform": {
+        "php": ">=5.3"
+    },
+    "platform-dev": [
+
+    ]
 }
