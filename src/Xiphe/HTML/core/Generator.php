@@ -639,8 +639,9 @@ class Generator
              */
             $t = $labelArgs;
             $labelArgs = self::parseAtts($labelArgs);
+            $tempLabels = $labelArgs;
 
-            if (count($labelArgs) == 1 && @array_shift(array_values($labelArgs)) === null) {
+            if (count($labelArgs) == 1 && @array_shift($tempLabels) === null) {
                 $labelArgs = array('inner' => $t);
             }
         }

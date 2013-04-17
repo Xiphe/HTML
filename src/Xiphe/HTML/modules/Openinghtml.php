@@ -127,13 +127,13 @@ class Openinghtml extends Core\BasicModule implements Core\ModuleInterface
         $sIeClass = '';
         if (class_exists('Xiphe\THEMASTER\core\THEMASTER')) {
             if (\Xiphe\THETOOLS::is_browser('ie')) {
-                if (\Xiphe\THETOOLS::is_browser('ie6x')) {
+                if (\Xiphe\THETOOLS::is_browser('ie<=6')) {
                     $sIeClass = $before.'lt-ie10 lt-ie9 lt-ie8 lt-ie7';
-                } elseif (\Xiphe\THETOOLS::is_browser('ie7x')) {
+                } elseif (\Xiphe\THETOOLS::is_browser('ie<=7')) {
                     $sIeClass = $before.'lt-ie10 lt-ie9 lt-ie8';
-                } elseif (\Xiphe\THETOOLS::is_browser('ie8x')) {
+                } elseif (\Xiphe\THETOOLS::is_browser('ie<=8')) {
                     $sIeClass = $before.'lt-ie10 lt-ie9';
-                } elseif (\Xiphe\THETOOLS::is_browser('ie9x')) {
+                } elseif (\Xiphe\THETOOLS::is_browser('ie<=9')) {
                     $sIeClass = $before.'lt-ie10';
                 }
             }

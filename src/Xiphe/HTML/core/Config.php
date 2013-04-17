@@ -263,7 +263,7 @@ class Config
                 && class_exists(TM\THE::WPSETTINGS)
             ) {
                 try {
-                    return TM\THEWPSETTINGS::get_setting($key, XIPHE_HTML_TEXTID);
+                    return TM\THEWPSETTINGS::sGet_setting($key, XIPHE_HTML_TEXTID);
                 } catch(\Exception $c) {
                     return self::$_config[$key];
                 }
@@ -293,7 +293,7 @@ class Config
             if (class_exists('Xiphe\THEMASTER\core\THE')
                 && class_exists(TM\THE::SETTINGS)
             ) {
-                $prev = TM\THEWPSETTINGS::get_setting($key, XIPHE_HTML_TEXTID);
+                $prev = TM\THEWPSETTINGS::sGet_setting($key, XIPHE_HTML_TEXTID);
                 self::s3t($prev, $value);
                 TM\THESETTINGS::sSet_setting($key, XIPHE_HTML_TEXTID, $prev);
             } else {

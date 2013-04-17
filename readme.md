@@ -128,6 +128,9 @@ Or check out the [Test/Examples Hybrid on html.xiphe.net](http://html.xiphe.net/
 Changelog
 ---------
 
+### 2.0.9
++ minor bugfixes and compatibility to THETOOLS v1.0.7
+
 ### 2.0.8
 + Select Module updated
 
