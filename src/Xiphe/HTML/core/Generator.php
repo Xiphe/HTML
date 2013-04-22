@@ -522,6 +522,18 @@ class Generator
         return str_replace(array(': ', ': '), ':', implode(';', $a));
     }
 
+    public function mergeClasses($a, $b)
+    {
+        if (!is_array($a)) {
+            $a = explode(' ', $a);
+        }
+        if (!is_array($b)) {
+            $b = explode(' ', $b);
+        }
+
+        return implode(' ', array_merge($a, $b));
+    }
+
     /**
      * Adds default attributes to the tag.
      *
