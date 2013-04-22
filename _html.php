@@ -19,6 +19,7 @@ Author: Hannes Diercks <info@xiphe.net>
 License: http://www.gnu.org/licenses/gpl-2.0.txt GNU GENERAL PUBLIC LICENSE
 Author URI: https://github.com/Xiphe/
 Update Server: http://plugins.red-thorn.de/v2/api/
+Branch: alldeps
 */
 
 namespace Xiphe;
