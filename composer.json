@@ -14,11 +14,17 @@
     ],
     "require": {
         "xiphe/base" : ">=1.0",
-        "phpspec/php-diff": "dev-master",
+        "chrisboulton/php-diff": "dev-master",
         "dflydev/markdown": "~1.0",
         "php": ">=5.3"
     },
     "autoload": {
         "psr-0": { "Xiphe\\HTML": "src" }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/chrisboulton/php-diff"
+        }
+    ]
 }

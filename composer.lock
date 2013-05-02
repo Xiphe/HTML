@@ -1,6 +1,43 @@
 {
-    "hash": "08ab6bf647e73cb46d0d1c13d17964e7",
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "b433e8bbfc1f18d75b1922961fddce25",
     "packages": [
+        {
+            "name": "chrisboulton/php-diff",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chrisboulton/php-diff.git",
+                "reference": "48d4f5e6b89812def86ce46d7541fc721694809d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chrisboulton/php-diff/zipball/48d4f5e6b89812def86ce46d7541fc721694809d",
+                "reference": "48d4f5e6b89812def86ce46d7541fc721694809d",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Diff": "lib/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Chris Boulton",
+                    "email": "@chrisboulton"
+                }
+            ],
+            "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
+            "support": {
+                "source": "https://github.com/chrisboulton/php-diff/tree/master",
+                "issues": "https://github.com/chrisboulton/php-diff/issues"
+            },
+            "time": "2013-03-09 12:19:32"
+        },
         {
             "name": "dflydev/markdown",
             "version": "v1.0.2",
@@ -56,39 +93,6 @@
             "time": "2012-01-15 19:36:37"
         },
         {
-            "name": "phpspec/php-diff",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpspec/php-diff.git",
-                "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/8d82ac415225fac373a4073ba14b1fe286aa2312",
-                "reference": "8d82ac415225fac373a4073ba14b1fe286aa2312",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Diff": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton"
-                }
-            ],
-            "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2012-11-08 08:55:45"
-        },
-        {
             "name": "xiphe/base",
             "version": "v1.1.2",
             "source": {
@@ -140,7 +144,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "phpspec/php-diff": 20
+        "chrisboulton/php-diff": 20
     },
     "platform": {
         "php": ">=5.3"
