@@ -519,19 +519,72 @@ class Generator
          */
         sort($a);
 
-        return str_replace(array(': ', ': '), ':', implode(';', $a));
+        return str_replace(array(': ', ': '), ':', implode(';', $a)).';';
     }
 
-    public function mergeClasses($a, $b)
+    /**
+     * Merge two strings or arrays of classes
+     * 
+     * @param  string|array $a
+     * @param  string|array $b
+     * @return string|array
+     */
+    public static function mergeClasses($a, $b)
     {
+        $str = 0;
         if (!is_array($a)) {
+            $str++;
             $a = explode(' ', $a);
         }
         if (!is_array($b)) {
+            $str++;
             $b = explode(' ', $b);
         }
 
-        return implode(' ', array_merge($a, $b));
+        $b = array_filter($b, function ($item) use ($a) {
+            return !in_array($item, $a);
+        });
+
+        $r = array_merge($a, $b);
+
+        sort($r);
+
+        if ($str === 2) {
+            $r = implode(' ', $r);
+        }
+
+        return $r;
+    }
+
+    /**
+     * Merge two sets of Tag attributes.
+     * 
+     * @param  string|array $a
+     * @param  string|array $b
+     * @param  boolean $combineClasses set false to overwrite classes of $b by the ones from $a 
+     * @param  boolean $combineStyles  set false to overwrite styles of $b by the ones from $a 
+     * @return array
+     */
+    public static function mergeAttrs($b, $a, $combineClasses = true, $combineStyles = true)
+    {
+        $a = self::parseAtts($a);
+        $b = self::parseAtts($b);
+
+        if ($combineClasses && isset($a['class']) && isset($b['class'])) {
+            $a['class'] = self::mergeClasses($a['class'], $b['class']);
+            unset($b['class']);
+        }
+
+        if ($combineStyles && isset($a['style']) && isset($b['style'])) {
+            $a['style'] = self::mergeStyles($a['style'], $b['style']);
+            unset($b['style']);
+        }
+
+        $r = array_merge($b, $a);
+
+        ksort($r);
+
+        return $r;
     }
 
     /**
