@@ -52,8 +52,7 @@ class Openinghtml extends Core\BasicModule implements Core\ModuleInterface
     {
         $this->htmlattrs['xmlns'] = 'http://www.w3.org/1999/xhtml';
 
-        echo '<?xml version="1.0" ?>';
-        Core\Generator::lineBreak();
+        echo '<?xml version="1.0" ?>'."\n";
         echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"';
         Core\Generator::lineBreak();
         Core\Config::set('tabs', '++');
@@ -73,7 +72,7 @@ class Openinghtml extends Core\BasicModule implements Core\ModuleInterface
      */
     public function html5()
     {
-        echo '<!DOCTYPE HTML>';
+        echo '<!DOCTYPE HTML>'."\n";
         Core\Generator::lineBreak();
         echo $this->getHtml();
         echo $this->getHead();
